@@ -14,6 +14,7 @@
     <body>
 
     <h1>Create Project</h1>
+    <h2>${cookie.hitCounter.value}</h2>
 
     <sf:form method="POST" modelAttribute="project" action="/project/create">
         <label>Project name: </label>

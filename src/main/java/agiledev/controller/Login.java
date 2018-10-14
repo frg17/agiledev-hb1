@@ -1,8 +1,12 @@
 package agiledev.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,9 +26,17 @@ public class Login {
 
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginPage(Model model) 
+    public String loginPage(
+        @CookieValue(value = "hitCounter", defaultValue = "0") Long hitCounter,
+        HttpServletResponse res,
+        Model model)
     {
         model.addAttribute("project", new Project());
+
+        //Prufa kökur
+        hitCounter++;
+        Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
+        res.addCookie(cookie);
 
         return "Login";
     }
