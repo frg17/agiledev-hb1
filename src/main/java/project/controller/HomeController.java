@@ -23,7 +23,7 @@ public class HomeController {
     // In this case, the mapping is the root "/", so when the project
     // is running and you enter "localhost:8080" into a browser, this
     // method is called
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/xxx", method = RequestMethod.GET)
     public String home(){
 
         // The string "Index" that is returned here is the name of the view

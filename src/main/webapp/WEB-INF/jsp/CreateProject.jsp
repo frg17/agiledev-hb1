@@ -13,14 +13,15 @@
     </head>
     <body>
 
-    <h1>Login</h1>
+    <h1>Create Project</h1>
 
-    <sf:form method="POST" modelAttribute="project" action="/project/login">
-        <sf:input path="token" type="text" placeholder="Project token"/><br>
-        <input type="submit" VALUE="Login"/>
+    <sf:form method="POST" modelAttribute="project" action="/project/create">
+        <label>Project name: </label>
+        <sf:input path="name" type="text" placeholder="Enter name"/><br>
+        <label>Project token: </label>
+        <sf:input path="token" type="text" placeholder="Make it hard to guess."/><br>
+        <input type="submit" VALUE="Create"/>
     </sf:form>
-
-    <a href="/project/create">Create project</a>
 
     </body>
 </html>
