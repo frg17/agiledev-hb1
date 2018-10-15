@@ -9,7 +9,16 @@
         <title>Project Title</title>
     </head>
     <body>
-
+    <header>
+        <c:choose>
+            <c:when test="${loggedIn}">
+                <form id="logout-form" method="POST" action="/project/logout">
+                    <input type="submit" value="Log out"/>
+                </form>
+            </c:when>
+        </c:choose>
+        
+    </header>
     <h1>HBV501G Project Spring Boot Skeleton</h1>
     <p>This skeleton of a Spring Boot Web project was made to help groups get started on their projects without to much hassle.</p>
 

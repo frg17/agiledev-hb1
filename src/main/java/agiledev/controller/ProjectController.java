@@ -1,5 +1,7 @@
 package agiledev.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +25,46 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginPage(
+    public String index(
         HttpServletResponse res,
         Model model)
     {
-        Project project = null;
-        if(project == null) {
-            System.out.println("Login");
+        String auth = res.getHeader("authenticated");
+        if(auth == null) {
             model.addAttribute("project", new Project());  //Til að geyma login token
             return "Login";
         } else {
-            model.addAttribute("project", new Project());
+            model.addAttribute("loggedIn", true);
             return "Index";           
         }
+    }
+
+    @RequestMapping(value = "/project/login", method = RequestMethod.POST)
+    public String projectLogin(@ModelAttribute("project") Project project,
+        HttpServletResponse res)
+    {
+        String token = project.getToken();
+        if(token != null) {
+            if(this.projectService.findByToken(token) != null) {
+                Cookie cookie = new Cookie("projectToken", project.getToken());
+                cookie.setPath("/");
+                res.addCookie(cookie);
+            }
+        }
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/project/logout", method = RequestMethod.POST)
+    public String projectLogin(
+        HttpServletRequest req,
+        HttpServletResponse res)
+    {
+        Cookie cookie = new Cookie("projectToken", "");
+        cookie.setPath("/");
+        res.addCookie(cookie);
+
+        return "redirect:/";
     }
 
 
@@ -54,9 +83,7 @@ public class ProjectController {
     {
         this.projectService.save(project);
 
-        model.addAttribute("project", new Project());
-
-        return "Login";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)

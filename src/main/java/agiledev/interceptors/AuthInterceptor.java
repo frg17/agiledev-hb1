@@ -31,11 +31,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception      
     {
+
+        //99.5% viss að þetta sé ekkert sérstaklega góð leið fyrir authentication.
+        //100% Breyta þannig að við notum session en ekki cookie
         Cookie cookie = WebUtils.getCookie(request, "projectToken");
         if(cookie != null) {
+            //Skoða hvort sé til verkefni með þessum token.
             Project project = this.projectService.findByToken(cookie.getValue());
-            System.out.println(cookie.getValue());
-            response.addCookie(new Cookie("projectToken", cookie.getValue()));
+            if(project != null) {
+                //Ef verkefni er til, þá er user authenticated.
+                response.addHeader("authenticated", cookie.getValue());
+            }
         }
 
         return true;

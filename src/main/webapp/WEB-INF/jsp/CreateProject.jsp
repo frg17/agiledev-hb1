@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css"/>"/>
     </head>
     <body>
-
+    
     <h1>Create Project</h1>
 
     <sf:form method="POST" modelAttribute="project" action="/project/create">
