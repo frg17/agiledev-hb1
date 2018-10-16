@@ -16,4 +16,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     List<Project> findAll();   //Eyða, bara fyrir debug
 
+    Long getIdByToken(String token);
+
 }

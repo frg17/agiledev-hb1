@@ -9,18 +9,18 @@
     <head>
         <title>Project Party</title>
 
-        <link rel="stylesheet" type="text/css" href="<c:url value="/css/style.css"/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
     </head>
     <body>
 
     <h1>Login</h1>
 
-    <sf:form method="POST" modelAttribute="project" action="/project/login">
+    <sf:form method="POST" modelAttribute="project" action="/projects/login">
         <sf:input path="token" type="text" placeholder="Project token"/><br>
         <input type="submit" VALUE="Login"/>
     </sf:form>
 
-    <a href="/project/create">Create project</a>
+    <a href="/projects/create">Create project</a>
 
     </body>
 </html>

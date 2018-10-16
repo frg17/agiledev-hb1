@@ -1,5 +1,7 @@
 package agiledev.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,39 +9,55 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import agiledev.persistence.entities.Project;
+import agiledev.persistence.entities.UserStory;
+import agiledev.service.AuthenticationService;
 import agiledev.service.ProjectService;
+import agiledev.service.UserStoryService;
 
 @Controller
 public class ProjectController {
 
     private ProjectService projectService;
+    private UserStoryService userStoryService;
+    private AuthenticationService auth;
 
     @Autowired
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(
+        ProjectService projectService,
+        UserStoryService userStoryService,
+        AuthenticationService auth) 
+    {
         this.projectService = projectService;
+        this.userStoryService = userStoryService;
+        this.auth = auth;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(
+        @CookieValue("projectToken") String projectToken,
         HttpServletResponse res,
         Model model)
     {
-        String auth = res.getHeader("authenticated");
-        if(auth == null) {
-            model.addAttribute("project", new Project());  //Til að geyma login token
+        if(!auth.isAuthenticated(res, model)) {
+            model.addAttribute("project", new Project());  //Til að geyma token fyrir login
             return "Login";
         } else {
-            model.addAttribute("loggedIn", true);
+            List<UserStory> userStories = 
+                this.userStoryService.findAllByProjectToken(projectToken); 
+
+            model.addAttribute("userStories", userStories);
+            model.addAttribute("userStory", new UserStory());
             return "Index";           
-        }
+        }   
     }
 
-    @RequestMapping(value = "/project/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/projects/login", method = RequestMethod.POST)
     public String projectLogin(@ModelAttribute("project") Project project,
         HttpServletResponse res)
     {
@@ -55,7 +73,7 @@ public class ProjectController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/project/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/projects/logout", method = RequestMethod.POST)
     public String projectLogin(
         HttpServletRequest req,
         HttpServletResponse res)
@@ -68,7 +86,7 @@ public class ProjectController {
     }
 
 
-    @RequestMapping(value = "/project/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/projects/create", method = RequestMethod.GET)
     public String createProjectGET(Model model) 
     {
         model.addAttribute("project", new Project());
@@ -77,7 +95,7 @@ public class ProjectController {
     }
 
 
-    @RequestMapping(value = "/project/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/projects/create", method = RequestMethod.POST)
     public String createProjectPOST(@ModelAttribute("project") Project project,
                                 Model model) 
     {

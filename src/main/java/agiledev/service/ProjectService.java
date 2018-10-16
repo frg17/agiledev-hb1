@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import agiledev.persistence.entities.Project;
 import agiledev.persistence.repositories.ProjectRepository;
 
-import java.util.Collections;
 import java.util.List;
 
 
@@ -33,5 +32,9 @@ public class ProjectService {
 
     public List<Project> findAll() {        //Eyða seinna, bara fyrir debug
         return this.repository.findAll();
+    }
+
+    public Long getIdByToken(String token) {
+        return this.repository.getIdByToken(token);
     }
 }
