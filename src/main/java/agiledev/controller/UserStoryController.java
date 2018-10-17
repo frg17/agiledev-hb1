@@ -34,7 +34,15 @@ public class UserStoryController {
     }
 
 
-
+    /*
+        Should create a new user story on server.
+        
+        ÞARF AÐ BREYTA!
+        1. Finna project id úr projectToken.
+        2. Ná í user stories með project id. 
+        --> Þá er ekki hægt að sækja user stories úr öðru project.
+        --> Þarf að breyta user story entities til að nota projectId ekki token
+    */
     @RequestMapping(value = "/userstory/create", method = RequestMethod.POST)
     public String createUserStory(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,

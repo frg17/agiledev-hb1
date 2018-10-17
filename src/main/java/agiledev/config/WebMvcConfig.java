@@ -10,16 +10,16 @@ import agiledev.interceptors.AuthInterceptor;
 
 /*
     Config for adding interceptors
+    More info: https://www.baeldung.com/spring-mvc-handlerinterceptor
 */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-
-    @Autowired
-    private AuthInterceptor authInterceptor;
+    //Hlaða interceptors hér. Autowired sér um þetta á bakvið tjöldin.
+    private @Autowired AuthInterceptor authInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //Add authentication interceptor. Ignore static assets.
+        //Bæta við interceptors hér.                        //Hunsa css (bæta við js kannski.)
         registry.addInterceptor(authInterceptor).excludePathPatterns("/css/**");
     }
 }

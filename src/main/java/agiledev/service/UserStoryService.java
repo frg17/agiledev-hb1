@@ -7,12 +7,19 @@ import agiledev.persistence.repositories.UserStoryRepository;
 
 import java.util.List;
 
+/*
+
+    Service layer handling persistent data access
+    concerning User Story entities.
+
+*/
 
 @Service
 public class UserStoryService {
     
     UserStoryRepository repository;
 
+    //Dependency injection.
     @Autowired
     public UserStoryService(UserStoryRepository repository) {
         this.repository = repository;

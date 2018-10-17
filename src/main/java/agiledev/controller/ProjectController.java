@@ -27,6 +27,7 @@ public class ProjectController {
     private UserStoryService userStoryService;
     private AuthenticationService auth;
 
+    //Dependency injection
     @Autowired
     public ProjectController(
         ProjectService projectService,
@@ -38,6 +39,10 @@ public class ProjectController {
         this.auth = auth;
     }
 
+    /*
+     *  Shows client all user stories of projects IF AUTHENTICATED.
+     *  ELSE goes to login.  
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
@@ -57,6 +62,9 @@ public class ProjectController {
         }   
     }
 
+    /*
+        Handles user login to project.
+    */
     @RequestMapping(value = "/projects/login", method = RequestMethod.POST)
     public String projectLogin(@ModelAttribute("project") Project project,
         HttpServletResponse res)
@@ -73,6 +81,9 @@ public class ProjectController {
         return "redirect:/";
     }
 
+    /*
+        Logs user out
+    */
     @RequestMapping(value = "/projects/logout", method = RequestMethod.POST)
     public String projectLogin(
         HttpServletRequest req,
@@ -85,7 +96,9 @@ public class ProjectController {
         return "redirect:/";
     }
 
-
+    /*
+        Should return a view to create a new project.
+    */
     @RequestMapping(value = "/projects/create", method = RequestMethod.GET)
     public String createProjectGET(Model model) 
     {
@@ -94,7 +107,9 @@ public class ProjectController {
         return "CreateProject";
     }
 
-
+    /*
+        Creates a new project on the server
+    */
     @RequestMapping(value = "/projects/create", method = RequestMethod.POST)
     public String createProjectPOST(@ModelAttribute("project") Project project,
                                 Model model) 
@@ -104,6 +119,9 @@ public class ProjectController {
         return "redirect:/";
     }
 
+    /*
+        DEBUG METHOD, REMOVE IN PROD
+    */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String seeAllProjects(Model model) {
         model.addAttribute("projects", this.projectService.findAll());

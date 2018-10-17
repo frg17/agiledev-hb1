@@ -15,23 +15,31 @@ import org.springframework.web.util.WebUtils;
 
 import agiledev.service.ProjectService;
 import agiledev.persistence.entities.Project;
+/*
+
+    Handles authenticating the client.
+    If client is authenticated a header is set in the response
+    which can be checked in the controller.
+
+*/
 
 @Component
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
     private ProjectService projectService;
 
+    //Dependency injection
     @Autowired
     public AuthInterceptor(ProjectService service) {
         this.projectService = service;
     }
 
 
+    //Keyrt á undan controller.
     @Override
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception      
     {
-
         //99.5% viss að þetta sé ekkert sérstaklega góð leið fyrir authentication.
         //100% Breyta þannig að við notum session en ekki cookie
         Cookie cookie = WebUtils.getCookie(request, "projectToken");

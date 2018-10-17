@@ -6,13 +6,17 @@ import agiledev.persistence.entities.Project;
 import agiledev.persistence.repositories.ProjectRepository;
 
 import java.util.List;
-
+/*
+    Service layer for access to persistent data
+    concerning Project entities.
+*/
 
 @Service
 public class ProjectService {
     
     ProjectRepository repository;
 
+    //Dependency injection.
     @Autowired
     public ProjectService(ProjectRepository repository) {
         this.repository = repository;

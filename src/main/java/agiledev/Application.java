@@ -21,7 +21,16 @@ public class Application {
         SpringApplication.run(Application.class,args);
     }
 
-    //Setja inn data í database þegar forrit fer af stað.
+    /**
+     * Bætir við hlutum í gagnagrunn þegar er runnað
+     * forritið. Gott að nota í development til að 
+     * hafa eitthvað í gagnagrunninum án þess að manually þurfa
+     * að setja það inn í hvert skipti þegar forritið er keyrt.
+     * 
+     * Bættið bara við köllum á viðeigandi repo eins og 
+     * fyrir neðan. (Ef repo er ekki sem parameter í falli, 
+     * þá bætiru henni bara við)
+     */
     @Bean
     public CommandLineRunner demoData(ProjectRepository repo) {
         return args -> { 
