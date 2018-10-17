@@ -1,7 +1,4 @@
-/*
-    Config for adding interceptors
 
-*/
 
 package agiledev.config;
 
@@ -11,6 +8,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import agiledev.interceptors.AuthInterceptor;
 
+/*
+    Config for adding interceptors
+*/
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 

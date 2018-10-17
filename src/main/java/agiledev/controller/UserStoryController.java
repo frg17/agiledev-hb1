@@ -37,7 +37,7 @@ public class UserStoryController {
 
     @RequestMapping(value = "/userstory/create", method = RequestMethod.POST)
     public String createUserStory(
-        @CookieValue("projectToken") String projectToken,
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         @ModelAttribute("userStory") UserStory userStory,
         HttpServletResponse res,
         Model model) 

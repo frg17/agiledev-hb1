@@ -40,7 +40,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(
-        @CookieValue("projectToken") String projectToken,
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         HttpServletResponse res,
         Model model)
     {
