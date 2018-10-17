@@ -110,3 +110,8 @@ local.properties
 .vscode/
 
 **/*.css
+
+
+
+# Frosti specific
+frosti.bat
