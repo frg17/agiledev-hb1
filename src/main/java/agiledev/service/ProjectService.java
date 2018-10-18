@@ -38,7 +38,7 @@ public class ProjectService {
         return this.repository.findAll();
     }
 
-    public Long getIdByToken(String token) {
-        return this.repository.getIdByToken(token);
+    public Project findOneByToken(String token) {
+        return this.repository.findOneByToken(token);
     }
 }

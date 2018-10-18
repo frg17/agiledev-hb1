@@ -1,7 +1,8 @@
 package agiledev.persistence.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Query;
+
 import agiledev.persistence.entities.Project;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     List<Project> findAll();   //Eyða, bara fyrir debug
 
-    Long getIdByToken(String token);
+
+    Project findOneByToken(String token);
+
 
 }

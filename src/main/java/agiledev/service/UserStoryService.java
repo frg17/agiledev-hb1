@@ -33,7 +33,8 @@ public class UserStoryService {
         this.repository.delete(story);
     }
 
-    public List<UserStory> findAllByProjectToken(String projectToken) {
-        return this.repository.findAllByProjectToken(projectToken);
+    public List<UserStory> findAllByProjectId(Long projectId) {
+        return this.repository.findAllByProjectIdOrderByCreatedAsc(projectId);
     }
+
 }

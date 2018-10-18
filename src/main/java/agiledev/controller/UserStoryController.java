@@ -52,8 +52,8 @@ public class UserStoryController {
     {
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/login";
 
-
-        userStory.setProjectToken(projectToken);
+        Long projectId = projectService.findOneByToken(projectToken).getId();
+        userStory.setProjectId(projectId);
         this.userStoryService.save(userStory);
 
         return "redirect:/";

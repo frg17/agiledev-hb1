@@ -6,6 +6,8 @@
 
 package agiledev.persistence.entities;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,16 +20,18 @@ public class UserStory {
 
     private String author;
     private String textContent;
-    private String projectToken;
+    private Long projectId;
     private Integer priority;
+
+    private Date created;   //Timestamp
+
+    @PrePersist
+    protected void onCreate() {
+        this.created = new Date();
+    }
 
     //Default constructor
     public UserStory() {
-
-    }
-
-    //Constructor
-    public UserStory(String author, String textContent, String projectToken, int priority) {
 
     }
 
@@ -74,17 +78,17 @@ public class UserStory {
     }
 
     /**
-     * @return the projectToken
+     * @return the projectId
      */
-    public String getProjectToken() {
-        return projectToken;
+    public Long getProjectId() {
+        return projectId;
     }
 
     /**
-     * @param projectToken the projectToken to set
+     * @param projectId the projectId to set
      */
-    public void setProjectToken(String projectToken) {
-        this.projectToken = projectToken;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     
@@ -100,6 +104,20 @@ public class UserStory {
      */
     public void setPriority(Integer priority) {
         this.priority = priority;
+    }
+
+    /**
+     * @return the created
+     */
+    public Date getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
 

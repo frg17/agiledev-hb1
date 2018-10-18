@@ -12,6 +12,6 @@ public interface UserStoryRepository extends JpaRepository<UserStory, Long> {
 
     void delete(UserStory story);
 
-    List<UserStory> findAllByProjectToken(String projectToken);   //Eyða, bara fyrir debug
+    List<UserStory> findAllByProjectIdOrderByCreatedAsc(Long projectId);
 
 }

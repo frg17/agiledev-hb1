@@ -51,10 +51,11 @@ public class ProjectController {
     {
         if(!auth.isAuthenticated(res, model)) {
             model.addAttribute("project", new Project());  //Til að geyma token fyrir login
-            return "Login";
+            return "projects/login";
         } else {
+            Long projectId = projectService.findOneByToken(projectToken).getId();
             List<UserStory> userStories = 
-                this.userStoryService.findAllByProjectToken(projectToken); 
+                this.userStoryService.findAllByProjectId(projectId); 
 
             model.addAttribute("userStories", userStories);
             model.addAttribute("userStory", new UserStory());
@@ -104,7 +105,7 @@ public class ProjectController {
     {
         model.addAttribute("project", new Project());
 
-        return "CreateProject";
+        return "projects/create";
     }
 
     /*
