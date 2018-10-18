@@ -85,7 +85,7 @@ public class ProjectController {
         Logs user out
     */
     @RequestMapping(value = "/projects/logout", method = RequestMethod.POST)
-    public String projectLogin(
+    public String projectLogout(
         HttpServletRequest req,
         HttpServletResponse res)
     {
