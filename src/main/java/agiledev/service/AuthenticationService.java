@@ -2,7 +2,6 @@ package agiledev.service;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -13,12 +12,6 @@ import org.springframework.ui.Model;
 
 @Component
 public class AuthenticationService {
-    private ProjectService service;
-
-    @Autowired
-    public AuthenticationService(ProjectService service) {
-        this.service = service;
-    }
 
     /**
      * Is called in a controller to check if user is authenticated.
