@@ -16,21 +16,11 @@
             <c:when test="${loggedIn}">
                 <header>
                     <form id="logout-form" method="POST" action="/projects/logout">
-                        <a onclick="document.getElementById('logout-form').submit();">Log out</a>
+                        <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
                     </form>
                 </header>
 
-                <!-- NEW USER STORY FORM -->
-                <sf:form method="POST" modelAttribute="userStory" action="/userstory/create" accept-charset="UTF-8">
-                    <label>Author: </label>
-                    <sf:input path="author" type="text" placeholder="Author name" /><br>
-                    <label>Story: </label>
-                    <sf:textarea path="textContent" type="text" placeholder="..." /><br>
-                 
-                    <input type="submit" VALUE="Share"/>
-
-                </sf:form>
-
+                <a class="button" href="/userstory/create">Create New User story</a>
                 <!-- ALLAR USER STORIES FYRIR VERKEFNI -->
                 <c:choose>
 
@@ -39,6 +29,7 @@
                         <c:forEach var="story" items="${userStories}">
                             <p>${story.textContent}</p>
                             <p>${story.author}</p>
+                            <a href="/userstory/edit/${story.id}"><button>Edit</button></a>
                             <hr>
                         </c:forEach>
                     </c:when>

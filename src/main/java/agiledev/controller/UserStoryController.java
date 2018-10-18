@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,14 +35,21 @@ public class UserStoryController {
     }
 
 
+    @RequestMapping(value = "/userstory/create", method = RequestMethod.GET)
+    public String createUserStoryGET(
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
+        HttpServletResponse res,
+        Model model) 
+    {
+        if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
+
+        model.addAttribute("userStory", new UserStory());
+        return "userstories/create";
+    }
+
+
     /*
         Should create a new user story on server.
-        
-        ÞARF AÐ BREYTA!
-        1. Finna project id úr projectToken.
-        2. Ná í user stories með project id. 
-        --> Þá er ekki hægt að sækja user stories úr öðru project.
-        --> Þarf að breyta user story entities til að nota projectId ekki token
     */
     @RequestMapping(value = "/userstory/create", method = RequestMethod.POST)
     public String createUserStory(
@@ -50,9 +58,9 @@ public class UserStoryController {
         HttpServletResponse res,
         Model model) 
     {
-        if(!this.auth.isAuthenticated(res, model)) return "redirect:/login";
+        if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
-        Long projectId = projectService.findOneByToken(projectToken).getId();
+        Long projectId = getProjectId(projectToken);
         userStory.setProjectId(projectId);
         this.userStoryService.save(userStory);
 
@@ -60,4 +68,49 @@ public class UserStoryController {
     }
 
 
+    @RequestMapping(value = "/userstory/edit/{id}", method = RequestMethod.GET)
+    public String editUserStoryGET(
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
+        @PathVariable Long id,
+        HttpServletResponse res,
+        Model model)
+    {
+        if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
+        Long projectId = getProjectId(projectToken);
+        UserStory story = this.userStoryService.findOneByIdAndProjectId(id, projectId);
+
+        model.addAttribute("userStory", story);
+
+        return "userstories/edit";
+    }
+
+    @RequestMapping(value = "/userstory/edit", method = RequestMethod.PATCH)
+    public String editUserStory(
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
+        HttpServletResponse res,
+        @ModelAttribute("userStory") UserStory userStory,
+        Model model
+    ) {
+        if (!this.auth.isAuthenticated(res, model)) return "redirect:/";
+
+        this.userStoryService.update(
+            userStory.getTextContent(), 
+            userStory.getAuthor(), 
+            userStory.getId(),
+            getProjectId(projectToken)
+        );
+
+        return "redirect:/";
+    }
+
+
+
+    /**
+     * Finds project id from a project token.
+     * @param token
+     * @return
+     */
+    public Long getProjectId(String token) {
+        return this.projectService.findOneByToken(token).getId();
+    }
 }

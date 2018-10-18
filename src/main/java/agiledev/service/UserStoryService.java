@@ -37,4 +37,11 @@ public class UserStoryService {
         return this.repository.findAllByProjectIdOrderByCreatedAsc(projectId);
     }
 
+    public UserStory findOneByIdAndProjectId(Long id, Long projectId) {
+        return this.repository.findOneByIdAndProjectId(id, projectId);
+    }
+
+    public void update(String textContent, String author, Long id, Long projectId) {
+        this.repository.update(textContent, author, id, projectId);
+    }
 }
