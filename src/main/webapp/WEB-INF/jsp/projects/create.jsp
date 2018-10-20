@@ -4,12 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
+
 <html lang="en">
 
     <head>
         <title>Project Party</title>
 
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
+        <script src="<c:url value="/js/hehe.js"/>"/> </script>
     </head>
     <body>
     

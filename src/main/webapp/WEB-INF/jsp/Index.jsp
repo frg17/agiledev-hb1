@@ -10,6 +10,7 @@
         <title>Project Title</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
+        <script src="<c:url value="/js/hehe.js"/>"/> </script>
     </head>
     <body>
         <c:choose>
