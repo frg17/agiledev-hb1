@@ -120,6 +120,33 @@ public class ProjectController {
         return "redirect:/";
     }
 
+
+    /**
+     * Displays the view for either planning poker 
+     * or priority according to which
+     * phase the project is in
+     */
+    @RequestMapping(value = "/estimation", method = RequestMethod.GET)
+    public String estimationView(
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
+        HttpServletResponse res,
+        Model model)
+    {
+
+        if (!this.auth.isAuthenticated(res, model)) return "redirect:/";
+
+
+        Long projectId = projectService.findOneByToken(projectToken).getId();
+        List<UserStory> userStories = 
+            this.userStoryService.findAllByProjectId(projectId); 
+
+        model.addAttribute("userStories", userStories);
+        model.addAttribute("userStory", new UserStory());
+
+
+        return "estimation/estimation";
+    }
+
     /*
         DEBUG METHOD, REMOVE IN PROD
     */
