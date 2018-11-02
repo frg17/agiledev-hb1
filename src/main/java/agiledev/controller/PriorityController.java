@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import agiledev.persistence.entities.PriorityEstimate;
 import agiledev.persistence.entities.UserStory;
 import agiledev.service.AuthenticationService;
 import agiledev.service.PriorityService;
@@ -38,16 +39,17 @@ public class PriorityController {
     }
 
     
-    @RequestMapping(value = "/priority", method = RequestMethod.GET)
+    @RequestMapping(value = "/priority/estimate", method = RequestMethod.POST)
     public String saveEstimates(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
-        @ModelAttribute("userStory") UserStory userStory,
         HttpServletResponse res,
+        @ModelAttribute("priorityEstimate") PriorityEstimate estimate,
         Model model) {
 
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
         
         
-        return "redirect:/";
+
+        return "redirect:/estimation";
     }
 }

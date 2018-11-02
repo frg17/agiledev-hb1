@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import agiledev.persistence.entities.PriorityEstimate;
 import agiledev.persistence.entities.Project;
 import agiledev.persistence.entities.UserStory;
 import agiledev.service.AuthenticationService;
@@ -142,6 +143,7 @@ public class ProjectController {
 
         model.addAttribute("userStories", userStories);
         model.addAttribute("userStory", new UserStory());
+        model.addAttribute("priorityEstimate", new PriorityEstimate());
 
 
         return "estimation/estimation";

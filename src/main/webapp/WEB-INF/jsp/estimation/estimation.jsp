@@ -26,15 +26,16 @@
                 <c:forEach var="story" items="${userStories}">
                     <p>${story.textContent}</p>
                     <p>${story.author}</p>
-                    <hr>
-                    <sf:form method="PATCH" modelAttribute="userStory" action="/userstory/edit" accept-charset="UTF-8">
+                    <p>${story.priority}</p>
+                    <sf:form method="POST" modelAttribute="userStory" action="/priority/estimate" accept-charset="UTF-8">
                     <sf:input path="id" type="hidden" value="${userStory.id}"/>
                     <sf:input path="projectId" type="hidden" value="${userstory.projectId}" />
-                    <sf:textarea path="textContent" type="text" value="${userStory.textContent}"></sf:textarea><br>
-                    <label>Author: </label>
-                    <sf:input path="author" type="text" value="${userStory.author}"></sf:input><br>
+                    <sf:input path="author" type="hidden" value="${userStory.author}"></sf:input><br>
+                    <label for="priority">Your estimation:</label>
+                    <sf:input path="priority" type="number" value="${userStory.priority}" id="priority"></sf:input>
                     <input type="Submit" value="Submit estimate" />
                 </sf:form>
+                <hr>
                 </c:forEach>
             </c:when>
 
