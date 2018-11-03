@@ -27,11 +27,9 @@
                     <p>User Story:</p>
                     <p>${story.textContent}</p>
                     <p>${story.author}</p>
-                    <p>${priorityEstimate.estimate}</p>
 
                     <sf:form method="POST" modelAttribute="priorityEstimate" action="/priority/estimate" accept-charset="UTF-8">
                         <sf:input path="userStoryId" type="hidden" value="${story.id}"></sf:input>
-                        <sf:input path="projectId" type="hidden" value="${story.projectId}"></sf:input>
 
                         <label for="priority">Your estimation:</label>
                         <sf:input path="estimate" type="number" id="priority"></sf:input>
@@ -43,9 +41,16 @@
                 <c:forEach var="estimate" items="${priorityEstimates}">
                     <p>An estimate: ${estimate.estimate}, with projectId: ${estimate.projectId} and userStoryId: ${estimate.userStoryId}</p>
                 </c:forEach>
+
+                <hr>
+                <sf:form method="POST" modelAttribute="priorityEstimates" action="priority/finalizeEstimates" accept-charset="UTF-8">
+                    <input type="Submit" value="Finalize estimates" />
+                </sf:form>
+
             </c:when>
             <c:otherwise>
-                <p><b>No user stories! <i>Create the first one!</i></b></p>
+                <p><b>No user stories!</b></p>
+                <input type="button"  onclick="location.href='/userstory/create'" value="Create the first one" >
             </c:otherwise>
 
         </c:choose>

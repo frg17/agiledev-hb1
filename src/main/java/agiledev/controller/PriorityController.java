@@ -1,5 +1,7 @@
 package agiledev.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +49,38 @@ public class PriorityController {
         Model model) {
 
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
+
+        // set the projectId for the estimate
+        estimate.setProjectId(getProjectId(projectToken));
         
         this.priorityService.save(estimate);
 
         return "redirect:/estimation";
+    }
+
+    @RequestMapping(value = "/priority/finalizeEstimates", method = RequestMethod.POST)
+    public String finalizeEstimates(
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
+        HttpServletResponse res,
+        Model model) {
+            
+        if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
+
+        List<PriorityEstimate> priorityEstimates = priorityService.findAll();
+
+        for (PriorityEstimate estimate : priorityEstimates) {
+            System.out.println("!!!!!!!!!!!!!!" + estimate.getEstimate());
+        }
+        return "redirect:/";
+    }
+
+
+    /**
+     * Finds project id from a project token.
+     * @param token
+     * @return
+     */
+    public Long getProjectId(String token) {
+        return this.projectService.findOneByToken(token).getId();
     }
 }

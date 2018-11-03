@@ -1,6 +1,9 @@
 package agiledev.persistence.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "priorityEstimate")
@@ -14,8 +17,13 @@ public class PriorityEstimate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    //Project id
 
+    @NotNull
     private Long projectId;
+
+    @NotNull
     private Long userStoryId;
+    
+    @NotNull
     private int estimate;
 
     public PriorityEstimate() {
