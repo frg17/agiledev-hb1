@@ -38,4 +38,8 @@ public class PriorityService {
     public List<PriorityEstimate> findAllByUserStoryId(Long id) {
         return this.repository.findAllByUserStoryId(id);
     }
+
+    public List<PriorityEstimate> findAll() {        //Eyða seinna, bara fyrir debug
+        return this.repository.findAll();
+    }
 }

@@ -24,21 +24,26 @@
             <c:when test="${not empty userStories}">
                 <hr>
                 <c:forEach var="story" items="${userStories}">
+                    <p>User Story:</p>
                     <p>${story.textContent}</p>
                     <p>${story.author}</p>
-                    <p>${story.priority}</p>
-                    <sf:form method="POST" modelAttribute="userStory" action="/priority/estimate" accept-charset="UTF-8">
-                    <sf:input path="id" type="hidden" value="${userStory.id}"/>
-                    <sf:input path="projectId" type="hidden" value="${userstory.projectId}" />
-                    <sf:input path="author" type="hidden" value="${userStory.author}"></sf:input><br>
-                    <label for="priority">Your estimation:</label>
-                    <sf:input path="priority" type="number" value="${userStory.priority}" id="priority"></sf:input>
-                    <input type="Submit" value="Submit estimate" />
-                </sf:form>
+                    <p>${priorityEstimate.estimate}</p>
+
+                    <sf:form method="POST" modelAttribute="priorityEstimate" action="/priority/estimate" accept-charset="UTF-8">
+                        <sf:input path="userStoryId" type="hidden" value="${story.id}"></sf:input>
+                        <sf:input path="projectId" type="hidden" value="${story.projectId}"></sf:input>
+
+                        <label for="priority">Your estimation:</label>
+                        <sf:input path="estimate" type="number" id="priority"></sf:input>
+                        <input type="Submit" value="Submit estimate" />
+                    </sf:form>
                 <hr>
                 </c:forEach>
-            </c:when>
 
+                <c:forEach var="estimate" items="${priorityEstimates}">
+                    <p>An estimate: ${estimate.estimate}, with projectId: ${estimate.projectId} and userStoryId: ${estimate.userStoryId}</p>
+                </c:forEach>
+            </c:when>
             <c:otherwise>
                 <p><b>No user stories! <i>Create the first one!</i></b></p>
             </c:otherwise>

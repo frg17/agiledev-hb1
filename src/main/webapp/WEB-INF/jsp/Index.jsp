@@ -33,6 +33,8 @@
                             <a href="/userstory/edit/${story.id}"><button>Edit</button></a>
                             <hr>
                         </c:forEach>
+
+                        <input type="button"  onclick="location.href='/estimation'" value="Estimate the User Stories" >
                     </c:when>
 
                     <c:otherwise>

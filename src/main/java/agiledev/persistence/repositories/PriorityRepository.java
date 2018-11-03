@@ -19,4 +19,7 @@ public interface PriorityRepository extends JpaRepository<PriorityEstimate, Long
     PriorityEstimate save(PriorityEstimate estimate);
     
     //void updateOne(PriorityEstimate estimate);
+
+    List<PriorityEstimate> findAll();   //Eyða, bara fyrir debug
+
 }

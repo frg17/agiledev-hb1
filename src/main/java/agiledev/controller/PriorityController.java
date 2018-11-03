@@ -48,7 +48,7 @@ public class PriorityController {
 
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
         
-        
+        this.priorityService.save(estimate);
 
         return "redirect:/estimation";
     }
