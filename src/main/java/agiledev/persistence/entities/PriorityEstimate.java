@@ -3,7 +3,6 @@ package agiledev.persistence.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "priorityEstimate")

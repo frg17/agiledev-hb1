@@ -43,7 +43,7 @@
                 </c:forEach>
 
                 <hr>
-                <sf:form method="POST" modelAttribute="priorityEstimates" action="priority/finalizeEstimates" accept-charset="UTF-8">
+                <sf:form method="PATCH" modelAttribute="priorityEstimates" action="priority/finalizeEstimates" accept-charset="UTF-8">
                     <input type="Submit" value="Finalize estimates" />
                 </sf:form>
 

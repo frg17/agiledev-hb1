@@ -145,7 +145,7 @@ public class ProjectController {
         List<UserStory> userStories = 
             this.userStoryService.findAllByProjectId(projectId); 
 
-        List<PriorityEstimate> priorityEstimates = priorityService.findAll();
+        List<PriorityEstimate> priorityEstimates = priorityService.findAllByProjectId(projectId);
         
         model.addAttribute("userStories", userStories);
         model.addAttribute("userStory", new UserStory());

@@ -17,6 +17,7 @@ import agiledev.persistence.entities.UserStory;
 import agiledev.service.AuthenticationService;
 import agiledev.service.PriorityService;
 import agiledev.service.ProjectService;
+import static java.lang.Math.toIntExact;
 
 
 /**
@@ -41,6 +42,9 @@ public class PriorityController {
     }
 
     
+    /**
+     * saves an estimate if the client is authenticated
+     */
     @RequestMapping(value = "/priority/estimate", method = RequestMethod.POST)
     public String saveEstimates(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
@@ -58,7 +62,11 @@ public class PriorityController {
         return "redirect:/estimation";
     }
 
-    @RequestMapping(value = "/priority/finalizeEstimates", method = RequestMethod.POST)
+    /**
+     * Finalizes the estimates for that project
+     * Calculates the average and patches the corresponding user story
+     */
+    @RequestMapping(value = "/priority/finalizeEstimates", method = RequestMethod.PATCH)
     public String finalizeEstimates(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         HttpServletResponse res,
@@ -66,11 +74,27 @@ public class PriorityController {
             
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
-        List<PriorityEstimate> priorityEstimates = priorityService.findAll();
+        Long projectId = getProjectId(projectToken);
+
+        List<PriorityEstimate> priorityEstimates = priorityService.findAllByProjectId(projectId);
 
         for (PriorityEstimate estimate : priorityEstimates) {
-            System.out.println("!!!!!!!!!!!!!!" + estimate.getEstimate());
+            System.out.println("!!!!!!!!!!!!!!" + estimate.getUserStoryId());
         }
+
+        /**
+         * sort the estimates by the userstory id
+         * toIntExact is a function for converting long (userStoryId)
+         * to an int. Then we can compare and sor 
+         */
+        priorityEstimates.sort((PriorityEstimate e1, PriorityEstimate e2)->
+            toIntExact(e1.getUserStoryId())-
+            toIntExact(e2.getUserStoryId()));
+        
+        for (PriorityEstimate estimate : priorityEstimates) {
+            System.out.println("is sorted!!!!!!!!!!!" + estimate.getUserStoryId());
+        }   
+
         return "redirect:/";
     }
 
