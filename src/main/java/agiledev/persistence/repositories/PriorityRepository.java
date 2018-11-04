@@ -1,9 +1,13 @@
 package agiledev.persistence.repositories;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import agiledev.persistence.entities.PriorityEstimate;
-import java.util.List;
 
 
 /**
@@ -22,6 +26,13 @@ public interface PriorityRepository extends JpaRepository<PriorityEstimate, Long
 
     List<PriorityEstimate> findAllByProjectId(Long id);
 
-    List<PriorityEstimate> findAll();   //Eyða, bara fyrir debug
+    List<PriorityEstimate> findAllByProjectIdAndUserStoryId(Long projectId, Long userStoryId);
 
+
+    @Transactional
+    @Query(value = "SELECT avg(e.estimate) FROM priorityEstimate e WHERE e.userStoryId = ?1 AND e.projectId = ?2", 
+    nativeQuery = true)
+    Long findAverageByUserStoryIdAndProjectId(Long userStoryId, Long projectId);
+
+    List<PriorityEstimate> findAll();   //Eyða, bara fyrir debug
 }

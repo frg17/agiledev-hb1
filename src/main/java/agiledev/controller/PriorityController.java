@@ -78,22 +78,20 @@ public class PriorityController {
 
         List<PriorityEstimate> priorityEstimates = priorityService.findAllByProjectId(projectId);
 
-        for (PriorityEstimate estimate : priorityEstimates) {
-            System.out.println("!!!!!!!!!!!!!!" + estimate.getUserStoryId());
-        }
-
         /**
          * sort the estimates by the userstory id
          * toIntExact is a function for converting long (userStoryId)
          * to an int. Then we can compare and sor 
          */
-        priorityEstimates.sort((PriorityEstimate e1, PriorityEstimate e2)->
+        priorityEstimates.sort((PriorityEstimate e1, PriorityEstimate e2) ->
             toIntExact(e1.getUserStoryId())-
             toIntExact(e2.getUserStoryId()));
         
         for (PriorityEstimate estimate : priorityEstimates) {
             System.out.println("is sorted!!!!!!!!!!!" + estimate.getUserStoryId());
-        }   
+            System.out.println("average is:" + priorityService.findAverageByUserStoryIdAndProjectId(estimate.getUserStoryId(), projectId));
+        }
+        
 
         return "redirect:/";
     }

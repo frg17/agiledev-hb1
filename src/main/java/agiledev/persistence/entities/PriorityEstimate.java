@@ -4,12 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
-@Entity
-@Table(name = "priorityEstimate")
 
 /**
  * PriorityEstimate
  */
+@Entity
+@Table(name = "priorityEstimate")
 public class PriorityEstimate {
 
     @Id

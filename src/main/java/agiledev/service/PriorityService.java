@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import agiledev.persistence.entities.PriorityEstimate;
 import agiledev.persistence.repositories.PriorityRepository;
 
+/*
+    Service layer for access to persistent data
+    concerning Priority entities.
+*/
 @Service
-
-/**
- * PriorityService
- */
 public class PriorityService {
 
     PriorityRepository repository;
@@ -45,5 +45,13 @@ public class PriorityService {
 
     public List<PriorityEstimate> findAllByProjectId(Long id) {
         return this.repository.findAllByProjectId(id);
+    }
+
+    public List<PriorityEstimate> findAllByProjectIdAndUserStoryId(Long projectId, Long userStoryId) {
+        return this.repository.findAllByProjectIdAndUserStoryId(projectId, userStoryId);
+    }
+
+    public Long findAverageByUserStoryIdAndProjectId(Long userStoryId, Long projectId){
+        return this.repository.findAverageByUserStoryIdAndProjectId(userStoryId, projectId);
     }
 }
