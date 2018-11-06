@@ -26,7 +26,6 @@ import agiledev.service.UserStoryService;
 public class ProjectController {
 
     private ProjectService projectService;
-    private UserStoryService userStoryService;
     private AuthenticationService auth;
     private PriorityService priorityService;
 
@@ -39,7 +38,6 @@ public class ProjectController {
         PriorityService priorityService) 
     {
         this.projectService = projectService;
-        this.userStoryService = userStoryService;
         this.auth = auth;
         this.priorityService = priorityService;
     }
@@ -58,9 +56,9 @@ public class ProjectController {
             model.addAttribute("project", new Project());  //Til að geyma token fyrir login
             return "projects/login";
         } else {
-            Long projectId = projectService.findOneByToken(projectToken).getId();
-            List<UserStory> userStories = 
-                this.userStoryService.findAllByProjectId(projectId); 
+            Project project = projectService.findOneByToken(projectToken);;
+            List<UserStory> userStories = project.getUserStories(); 
+
 
             model.addAttribute("userStories", userStories);
             model.addAttribute("userStory", new UserStory());

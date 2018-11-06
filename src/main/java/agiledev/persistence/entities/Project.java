@@ -7,6 +7,7 @@ package agiledev.persistence.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -21,6 +22,9 @@ public class Project {
 
     private String name;    //Name of project
     private String token;   //Token for project
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    private List<UserStory> userStories;
 
 
     @PrePersist
@@ -89,10 +93,25 @@ public class Project {
         this.token = token;
     }
 
+    /**
+     * @return the userStories
+     */
+    public List<UserStory> getUserStories() {
+        return userStories;
+    }
+
+    /**
+     * @param userStories the userStories to set
+     */
+    public void setUserStories(List<UserStory> userStories) {
+        this.userStories = userStories;
+    }
+
 
 
     @Override
     public String toString() {
         return String.format("Project name: %s", this.name);
     }
+
 }

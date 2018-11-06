@@ -13,8 +13,6 @@ import javax.transaction.Transactional;
 
 public interface UserStoryRepository extends JpaRepository<UserStory, Long> {
 
-    UserStory save(UserStory story);
-
     void delete(UserStory story);
 
     List<UserStory> findAllByProjectIdOrderByCreatedAsc(Long projectId);
