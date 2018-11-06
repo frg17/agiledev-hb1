@@ -15,8 +15,6 @@ import java.util.List;
  */
 public interface PostitNoteRepository extends JpaRepository<PostitNote, Long> {
 
-    PostitNote save(PostitNote postitNote);
-
     void delete(PostitNote postitNote);
 
     List<PostitNote> findAll();

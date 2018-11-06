@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    Project save(Project project);
-
     void delete(Project project);
 
     Project findByToken(String token);

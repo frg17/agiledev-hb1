@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import agiledev.persistence.entities.Project;
 import agiledev.persistence.entities.UserStory;
 import agiledev.service.AuthenticationService;
 import agiledev.service.ProjectService;
@@ -61,10 +62,10 @@ public class UserStoryController {
     {
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
-        Long projectId = getProjectId(projectToken);
-        userStory.setProjectId(projectId);
-        this.userStoryService.save(userStory);
-
+        Project project = getProject(projectToken);
+        userStory.setProject(project);
+        UserStory u = this.userStoryService.save(userStory);
+        System.out.println(u);
         return "redirect:/";
     }
 
@@ -77,9 +78,9 @@ public class UserStoryController {
         Model model)
     {
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
-        Long projectId = getProjectId(projectToken);
-        UserStory story = this.userStoryService.findOneByIdAndProjectId(id, projectId);
-
+        Project project = getProject(projectToken);
+        UserStory story = this.userStoryService.findOneByIdAndProjectId(id, project.getId());
+        
         model.addAttribute("userStory", story);
 
         return "userstories/edit";
@@ -98,7 +99,7 @@ public class UserStoryController {
             userStory.getTextContent(), 
             userStory.getAuthor(), 
             userStory.getId(),
-            getProjectId(projectToken)
+            getProject(projectToken).getId()
         );
 
         return "redirect:/";
@@ -111,7 +112,7 @@ public class UserStoryController {
      * @param token
      * @return
      */
-    public Long getProjectId(String token) {
-        return this.projectService.findOneByToken(token).getId();
+    private Project getProject(String token) {
+        return this.projectService.findOneByToken(token);
     }
 }

@@ -20,8 +20,10 @@ public class UserStory {
 
     private String author;
     private String textContent;
-    private Long projectId;
     private Integer priority;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Project project;
 
     private Date created;   //Timestamp
 
@@ -34,6 +36,7 @@ public class UserStory {
     public UserStory() {
 
     }
+
 
     /**
      * @return the id
@@ -77,20 +80,6 @@ public class UserStory {
         this.textContent = textContent;
     }
 
-    /**
-     * @return the projectId
-     */
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    /**
-     * @param projectId the projectId to set
-     */
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
-
     
     /**
      * @return the priority
@@ -114,10 +103,32 @@ public class UserStory {
     }
 
     /**
+     * @return the project
+     */
+    public Project getProject() {
+        return project;
+    }
+
+    /**
+     * @param project the project to set
+     */
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    /**
      * @param created the created to set
      */
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "Project Id: " + this.project.getId() +
+            "\nId: " + this.id +
+            "\nAuthor: " + this.author + 
+            "\nContent: " + this.textContent;
     }
 
 

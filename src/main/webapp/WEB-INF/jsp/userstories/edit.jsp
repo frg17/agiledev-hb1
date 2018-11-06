@@ -24,7 +24,6 @@
         
         <sf:form method="PATCH" modelAttribute="userStory" action="/userstory/edit" accept-charset="UTF-8">
             <sf:input path="id" type="hidden" value="${userStory.id}"/>
-            <sf:input path="projectId" type="hidden" value="${userstory.projectId}" />
             <sf:textarea path="textContent" type="text" value="${userStory.textContent}"></sf:textarea><br>
             <label>Author: </label>
             <sf:input path="author" type="text" value="${userStory.author}"></sf:input><br>
