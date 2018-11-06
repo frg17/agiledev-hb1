@@ -29,8 +29,7 @@ public interface PriorityRepository extends JpaRepository<PriorityEstimate, Long
     List<PriorityEstimate> findAllByProjectIdAndUserStoryId(Long projectId, Long userStoryId);
 
 
-    @Transactional
-    @Query(value = "SELECT avg(e.estimate) FROM priorityEstimate e WHERE e.userStoryId = ?1 AND e.projectId = ?2", 
+    @Query(value = "SELECT avg(e.estimate) FROM priority_estimate e WHERE e.user_story_id = ?1 AND e.project_id = ?2", 
     nativeQuery = true)
     Long findAverageByUserStoryIdAndProjectId(Long userStoryId, Long projectId);
 
