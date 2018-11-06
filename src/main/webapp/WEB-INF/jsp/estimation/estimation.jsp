@@ -29,17 +29,16 @@
                     <p>${story.author}</p>
 
                     <sf:form method="POST" modelAttribute="priorityEstimate" action="/priority/estimate" accept-charset="UTF-8">
-                        <sf:input path="userStoryId" type="hidden" value="${story.id}"></sf:input>
+                        <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
 
                         <label for="priority">Your estimation:</label>
                         <sf:input path="estimate" type="number" id="priority"></sf:input>
                         <input type="Submit" value="Submit estimate" />
                     </sf:form>
+                        <c:forEach var="estimate" items="${story.priorityEstimates}">
+                            <p>An estimate: ${estimate.estimate} </p>
+                        </c:forEach>
                 <hr>
-                </c:forEach>
-
-                <c:forEach var="estimate" items="${priorityEstimates}">
-                    <p>An estimate: ${estimate.estimate}, with projectId: ${estimate.projectId} and userStoryId: ${estimate.userStoryId}</p>
                 </c:forEach>
 
                 <hr>

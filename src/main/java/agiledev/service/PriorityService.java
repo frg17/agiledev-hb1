@@ -26,32 +26,28 @@ public class PriorityService {
         return this.repository.save(estimate);
     }
 
-    /*
-    public void saveList(List<PriorityEstimate> estimates) {
-        this.repository.saveList(estimates);
-    }
-    public void update(PriorityEstimate estimate) {
-        this.repository.updateOne(estimate);
-    }
-    */
-
-    public List<PriorityEstimate> findAllByUserStoryId(Long id) {
-        return this.repository.findAllByUserStoryId(id);
-    }
 
     public List<PriorityEstimate> findAll() {        //Eyða seinna, bara fyrir debug
         return this.repository.findAll();
     }
 
-    public List<PriorityEstimate> findAllByProjectId(Long id) {
-        return this.repository.findAllByProjectId(id);
-    }
-
-    public List<PriorityEstimate> findAllByProjectIdAndUserStoryId(Long projectId, Long userStoryId) {
-        return this.repository.findAllByProjectIdAndUserStoryId(projectId, userStoryId);
-    }
-
+    
     public Long findAverageByUserStoryIdAndProjectId(Long userStoryId, Long projectId){
         return this.repository.findAverageByUserStoryIdAndProjectId(userStoryId, projectId);
+    }
+
+
+    /**
+     * Finnur average af lista af estimates.
+     * @param estimates
+     * @return
+     */
+    public Integer findAverage(List<PriorityEstimate> estimates) {
+        int sum = 0;
+        for (PriorityEstimate es : estimates) {
+            sum += es.getEstimate();
+        }
+
+        return sum / estimates.size();
     }
 }

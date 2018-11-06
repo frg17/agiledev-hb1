@@ -7,6 +7,7 @@
 package agiledev.persistence.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,11 +26,19 @@ public class UserStory {
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userStory")
+    private List<PriorityEstimate> priorityEstimates;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userStory")
+    private List<PlanningPokerEstimate> planningPokerEstimates;
+
+
     private Date created;   //Timestamp
 
     @PrePersist
     protected void onCreate() {
         this.created = new Date();
+        this.priority = 0;
     }
 
     //Default constructor
@@ -121,6 +130,34 @@ public class UserStory {
      */
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    /**
+     * @return the planningPokerEstimates
+     */
+    public List<PlanningPokerEstimate> getPlanningPokerEstimates() {
+        return planningPokerEstimates;
+    }
+
+    /**
+     * @return the priorityEstimates
+     */
+    public List<PriorityEstimate> getPriorityEstimates() {
+        return priorityEstimates;
+    }
+
+    /**
+     * @param planningPokerEstimates the planningPokerEstimates to set
+     */
+    public void setPlanningPokerEstimates(List<PlanningPokerEstimate> planningPokerEstimates) {
+        this.planningPokerEstimates = planningPokerEstimates;
+    }
+
+    /**
+     * @param priorityEstimates the priorityEstimates to set
+     */
+    public void setPriorityEstimates(List<PriorityEstimate> priorityEstimates) {
+        this.priorityEstimates = priorityEstimates;
     }
 
     @Override

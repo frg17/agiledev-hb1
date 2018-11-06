@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import agiledev.persistence.entities.UserStory;
 import agiledev.persistence.repositories.UserStoryRepository;
 
-import java.util.List;
 
 /*
 
@@ -33,9 +32,6 @@ public class UserStoryService {
         this.repository.delete(story);
     }
 
-    public List<UserStory> findAllByProjectId(Long projectId) {
-        return this.repository.findAllByProjectIdOrderByCreatedAsc(projectId);
-    }
 
     public UserStory findOneByIdAndProjectId(Long id, Long projectId) {
         return this.repository.findOneByIdAndProjectId(id, projectId);

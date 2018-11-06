@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import agiledev.persistence.entities.PriorityEstimate;
+import agiledev.persistence.entities.Project;
 import agiledev.persistence.entities.UserStory;
 import agiledev.service.AuthenticationService;
 import agiledev.service.PriorityService;
 import agiledev.service.ProjectService;
-import static java.lang.Math.toIntExact;
-
+import agiledev.service.UserStoryService;
 
 /**
  * PriorityController
@@ -29,14 +29,17 @@ public class PriorityController {
     private PriorityService priorityService;
     private ProjectService projectService;
     private AuthenticationService auth;
+    private UserStoryService userStoryService;
 
     @Autowired
     public PriorityController(
         PriorityService priorityService,
         ProjectService projectService,
-        AuthenticationService auth) 
+        AuthenticationService auth,
+        UserStoryService userStoryService) 
     {
         this.priorityService = priorityService;
+        this.userStoryService = userStoryService;
         this.projectService = projectService;
         this.auth = auth;
     }
@@ -53,11 +56,12 @@ public class PriorityController {
         Model model) {
 
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
-
-        // set the projectId for the estimate
-        estimate.setProjectId(getProjectId(projectToken));
-        
-        this.priorityService.save(estimate);
+    
+        UserStory us = userStoryService.findOneByIdAndProjectId(            //Validate-a að userstory id
+            estimate.getUserStory().getId(), getProjectId(projectToken));   //tilheyri þessu verkefni
+        if(us != null) {
+            this.priorityService.save(estimate);
+        }
 
         return "redirect:/estimation";
     }
@@ -74,25 +78,19 @@ public class PriorityController {
             
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
-        Long projectId = getProjectId(projectToken);
+        Project project = this.projectService.findByToken(projectToken);
+        List<UserStory> userStories =  project.getUserStories(); //Lazy fetch
 
-        List<PriorityEstimate> priorityEstimates = priorityService.findAllByProjectId(projectId);
+        for(UserStory us : userStories) {
+            List<PriorityEstimate> estimates = us.getPriorityEstimates(); //Lazy fetch
 
-        /**
-         * sort the estimates by the userstory id
-         * toIntExact is a function for converting long (userStoryId)
-         * to an int. Then we can compare and sor 
-         */
-        priorityEstimates.sort((PriorityEstimate e1, PriorityEstimate e2) ->
-            toIntExact(e1.getUserStoryId())-
-            toIntExact(e2.getUserStoryId()));
-        
-        for (PriorityEstimate estimate : priorityEstimates) {
-            System.out.println("is sorted!!!!!!!!!!!" + estimate.getUserStoryId());
-            System.out.println("average is:" + priorityService.findAverageByUserStoryIdAndProjectId(estimate.getUserStoryId(), projectId));
+            Integer ave = priorityService.findAverage(estimates);  //Finn average
+
+            us.setPriority(ave);  //Bæti við average í userstory
+            this.userStoryService.save(us);  //Uppfæri
         }
-        
 
+        
         return "redirect:/";
     }
 

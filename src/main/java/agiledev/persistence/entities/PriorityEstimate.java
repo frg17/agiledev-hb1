@@ -15,22 +15,18 @@ public class PriorityEstimate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    //Project id
-
-    @NotNull
-    private Long projectId;
-
-    @NotNull
-    private Long userStoryId;
     
     @NotNull
     private int estimate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserStory userStory;
+
     public PriorityEstimate() {
     }
 
-    public PriorityEstimate (Long projectId, Long userStoryId, int estimate) {
-        this.projectId = projectId;
-        this.userStoryId = userStoryId;
+    public PriorityEstimate (int estimate) {
+
         this.estimate = estimate;
     }
 
@@ -63,30 +59,16 @@ public class PriorityEstimate {
     }
 
     /**
-     * @return the user story id
+     * @return the userStory
      */
-    public Long getUserStoryId() {
-        return this.userStoryId;
+    public UserStory getUserStory() {
+        return userStory;
     }
 
     /**
-     * @param id the user story id to set
+     * @param userStory the userStory to set
      */
-    public void setUserStoryId(Long id) {
-        this.userStoryId = id;
-    }
-
-    /**
-     * @return the project id
-     */
-    public Long getProjectId() {
-        return this.projectId;
-    }
-
-    /**
-     * @param id the project id to set
-     */
-    public void setProjectId(Long id) {
-        this.projectId = id;
+    public void setUserStory(UserStory userStory) {
+        this.userStory = userStory;
     }
  }

@@ -18,7 +18,6 @@ import agiledev.persistence.entities.PriorityEstimate;
 import agiledev.persistence.entities.Project;
 import agiledev.persistence.entities.UserStory;
 import agiledev.service.AuthenticationService;
-import agiledev.service.PriorityService;
 import agiledev.service.ProjectService;
 import agiledev.service.UserStoryService;
 
@@ -27,19 +26,16 @@ public class ProjectController {
 
     private ProjectService projectService;
     private AuthenticationService auth;
-    private PriorityService priorityService;
 
     //Dependency injection
     @Autowired
     public ProjectController(
         ProjectService projectService,
         UserStoryService userStoryService,
-        AuthenticationService auth,
-        PriorityService priorityService) 
+        AuthenticationService auth) 
     {
         this.projectService = projectService;
         this.auth = auth;
-        this.priorityService = priorityService;
     }
 
     /*
@@ -138,18 +134,21 @@ public class ProjectController {
 
         if (!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
+        Project project = projectService.findOneByToken(projectToken);
 
-        Long projectId = projectService.findOneByToken(projectToken).getId();
-        List<UserStory> userStories = 
-            this.userStoryService.findAllByProjectId(projectId); 
-
-        List<PriorityEstimate> priorityEstimates = priorityService.findAllByProjectId(projectId);
+        List<UserStory> userStories = project.getUserStories();
         
+        for(int i = 0; i < userStories.size(); i++) {
+            userStories.get(i).getPriorityEstimates(); //Þarf að sækja vegna LAZY fetch
+        }
+        
+        //Userstories fyrir view
         model.addAttribute("userStories", userStories);
-        model.addAttribute("userStory", new UserStory());
-        model.addAttribute("priorityEstimates", priorityEstimates);
-        model.addAttribute("priorityEstimate", new PriorityEstimate());
 
+        //Priority estimate fyrir form.
+        PriorityEstimate estimate = new PriorityEstimate();
+        estimate.setUserStory(new UserStory());
+        model.addAttribute("priorityEstimate", estimate);
 
         return "estimation/estimation";
     }

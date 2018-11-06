@@ -30,6 +30,7 @@
                         <c:forEach var="story" items="${userStories}">
                             <p>${story.textContent}</p>
                             <p>${story.author}</p>
+                            <p>Priority: ${story.priority}</p>
                             <a href="/userstory/edit/${story.id}"><button>Edit</button></a>
                             <hr>
                         </c:forEach>

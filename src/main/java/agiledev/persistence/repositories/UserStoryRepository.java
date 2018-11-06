@@ -6,16 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 
 //import org.springframework.data.jpa.repository.Query;
 import agiledev.persistence.entities.UserStory;
-
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 public interface UserStoryRepository extends JpaRepository<UserStory, Long> {
 
     void delete(UserStory story);
-
-    List<UserStory> findAllByProjectIdOrderByCreatedAsc(Long projectId);
 
     UserStory findOneByIdAndProjectId(Long id, Long projectId);
 

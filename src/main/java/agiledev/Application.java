@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import agiledev.persistence.entities.Project;
+import agiledev.persistence.entities.UserStory;
 import agiledev.persistence.repositories.ProjectRepository;
+import agiledev.persistence.repositories.UserStoryRepository;
 
 /**
  * The main class of the project.
@@ -32,9 +34,23 @@ public class Application {
      * þá bætiru henni bara við)
      */
     @Bean
-    public CommandLineRunner demoData(ProjectRepository repo) {
+    public CommandLineRunner demoData(ProjectRepository projectRepo, UserStoryRepository userStoryRepo) {
+        Project pro = new Project("blarg", "blorg");
+
+        UserStory us = new UserStory();
+        us.setAuthor("Frozen");
+        us.setTextContent("ocean");
+        us.setProject(pro);
+
+        UserStory us2 = new UserStory();
+        us2.setAuthor("Frozen Ocean");
+        us2.setTextContent("Geggjað R&B nafn cuz Frank Ocean cuz");
+        us2.setProject(pro);
+
         return args -> { 
-            repo.save(new Project("blarg", "blorg"));
+            projectRepo.save(pro);
+            userStoryRepo.save(us);
+            userStoryRepo.save(us2);
         };
     }
 }
