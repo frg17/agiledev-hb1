@@ -26,6 +26,10 @@ public class PriorityService {
         return this.repository.save(estimate);
     }
 
+    public void delete(PriorityEstimate estimate) {
+        this.repository.delete(estimate);
+    }
+
 
     public List<PriorityEstimate> findAll() {        //Eyða seinna, bara fyrir debug
         return this.repository.findAll();

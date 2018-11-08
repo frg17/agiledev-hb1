@@ -32,16 +32,21 @@
                         <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
 
                         <label for="priority">Your estimation:</label>
-                        <sf:input path="estimate" type="number" id="priority"></sf:input>
+                        <sf:input path="estimate" type="number" id="priority" min="1"></sf:input>
                         <input type="Submit" value="Submit estimate" />
                     </sf:form>
                         <c:forEach var="estimate" items="${story.priorityEstimates}">
-                            <p>An estimate: ${estimate.estimate} </p>
+
+                            <sf:form method="DELETE" modelAttribute="priorityEstimate" action="/priority/estimate" accept-charset="UTF-8">
+                                <p>An estimate: ${estimate.estimate} </p>
+                                <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
+                                <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
+                                <input type="Submit" value="Delete this estimate" />
+                            </sf:form>
                         </c:forEach>
                 <hr>
                 </c:forEach>
 
-                <hr>
                 <sf:form method="PATCH" modelAttribute="priorityEstimates" action="priority/finalizeEstimates" accept-charset="UTF-8">
                     <input type="Submit" value="Finalize estimates" />
                 </sf:form>
