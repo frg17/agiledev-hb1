@@ -12,6 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "projects")
 public class Project {
+    public final static int PROJECT_PHASE_DEFAULT = 0;
+    public final static int PROJECT_PHASE_PLANNINGPOKER = 1;
+    public final static int PROJECT_PHASE_PRIORITY = 2;
 
 
     @Id
@@ -24,8 +27,8 @@ public class Project {
     private String token;   //Token for project
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    @OrderBy("created ASC")
     private List<UserStory> userStories;
-
 
     @PrePersist
     protected void onCreate() {

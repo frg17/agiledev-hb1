@@ -43,6 +43,7 @@ public class PriorityService {
      * @return
      */
     public Integer findAverage(List<PriorityEstimate> estimates) {
+        if (estimates.size() == 0) return 0;
         int sum = 0;
         for (PriorityEstimate es : estimates) {
             sum += es.getEstimate();
