@@ -67,6 +67,30 @@ public class PriorityController {
     }
 
     /**
+     * deletes an estimate if the client is authenticated
+     */
+    @RequestMapping(value = "/priority/estimate", method = RequestMethod.DELETE)
+    public String deleteEstimate(
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
+        HttpServletResponse res,
+        @ModelAttribute("priorityEstimate") PriorityEstimate estimate,
+        Model model) {
+
+        if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
+
+        System.out.println("!I!I!I!I!I!I" + estimate.getEstimate());
+
+        UserStory us = userStoryService.findOneByIdAndProjectId(            //Validate-a að userstory id
+            estimate.getUserStory().getId(), getProjectId(projectToken));   //tilheyri þessu verkefni
+
+        if(us != null) {
+            this.priorityService.delete(estimate);
+        }
+
+        return "redirect:/estimation";
+    }
+
+    /**
      * Finalizes the estimates for that project
      * Calculates the average and patches the corresponding user story
      */
