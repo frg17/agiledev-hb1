@@ -12,9 +12,12 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
         <script src="<c:url value="/js/hehe.js"/>"/> </script>
     </head>
+
     <body>
         <c:choose>
             <c:when test="${loggedIn}">
+                <h1>User Stories</h1>
+                
                 <header>
                     <form id="logout-form" method="POST" action="/projects/logout">
                         <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
@@ -31,11 +34,11 @@
                             <p>${story.textContent}</p>
                             <p>${story.author}</p>
                             <p>Priority: ${story.priority}</p>
-                            <a href="/userstory/edit/${story.id}"><button>Edit</button></a>
+                            <a class="button" href="/userstory/edit/${story.id}">Edit</a>
                             <hr>
                         </c:forEach>
 
-                        <input type="button"  onclick="location.href='/estimation'" value="Estimate the User Stories" >
+                        <input class="button" type="button"  onclick="location.href='/estimation'" value="Estimate the User Stories" >
                     </c:when>
 
                     <c:otherwise>

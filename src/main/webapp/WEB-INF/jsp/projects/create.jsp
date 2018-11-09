@@ -22,7 +22,7 @@
         <sf:input path="name" type="text" placeholder="Enter name"/><br>
         <label>Project token: </label>
         <sf:input path="token" type="text" placeholder="Make it hard to guess."/><br>
-        <input type="submit" VALUE="Create"/>
+        <input class="button" type="submit" VALUE="Create"/>
     </sf:form>
 
     </body>

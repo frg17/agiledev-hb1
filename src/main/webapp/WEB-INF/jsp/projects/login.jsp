@@ -18,7 +18,7 @@
 
     <sf:form method="POST" modelAttribute="project" action="/projects/login">
         <sf:input path="token" type="text" placeholder="Project token"/><br>
-        <input type="submit" VALUE="Login"/>
+        <input class="button" type="submit" VALUE="Login"/>
     </sf:form>
 
     <a href="/projects/create">Create project</a>

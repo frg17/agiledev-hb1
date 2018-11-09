@@ -33,7 +33,7 @@
 
                         <label for="priority">Your estimation:</label>
                         <sf:input path="estimate" type="number" id="priority" min="1"></sf:input>
-                        <input type="Submit" value="Submit estimate" />
+                        <input class="button" type="Submit" value="Submit estimate" />
                     </sf:form>
                         <c:forEach var="estimate" items="${story.priorityEstimates}">
 
@@ -41,20 +41,20 @@
                                 <p>An estimate: ${estimate.estimate} </p>
                                 <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
                                 <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
-                                <input type="Submit" value="Delete this estimate" />
+                                <input class="button" type="Submit" value="Delete this estimate" />
                             </sf:form>
                         </c:forEach>
                 <hr>
                 </c:forEach>
 
                 <sf:form method="PATCH" modelAttribute="priorityEstimates" action="priority/finalizeEstimates" accept-charset="UTF-8">
-                    <input type="Submit" value="Finalize estimates" />
+                    <input class="button" type="Submit" value="Finalize estimates" />
                 </sf:form>
 
             </c:when>
             <c:otherwise>
                 <p><b>No user stories!</b></p>
-                <input type="button"  onclick="location.href='/userstory/create'" value="Create the first one" >
+                <input class="button" type="button"  onclick="location.href='/userstory/create'" value="Create the first one" >
             </c:otherwise>
 
         </c:choose>

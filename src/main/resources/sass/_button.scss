@@ -1,13 +1,18 @@
 .button {
-    display: inline-block;
-    background-color: #bbb;
-    border: 1px solid #000;
-    border-radius: 2px;
-    padding: 5px;
-
+    display : inline-block; 
+    padding : .098em 1.075em;
+    margin : 10px 0px;
+    border : 0.094em solid #000; 
+    border-radius : .625em;
+    background-color : #111;
+    box-shadow: 0 .375em .313em -0.313em rgba(0,0,0,.8), inset 0 .063em rgba(255,255,255,.4), inset 0 -0.188em rgba(0,0,0,.15);
+    color : #FFF;
+    text-decoration : none;
+    cursor : pointer;
+    font : bold 0.8rem sans-serif;
 
     &:hover {
-        background-color: #999;
+        background-color: #555;
         transition: background-color 0.5s;
     }
 }
