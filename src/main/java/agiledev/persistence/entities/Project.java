@@ -12,9 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "projects")
 public class Project {
-    public final static int PROJECT_PHASE_DEFAULT = 0;
-    public final static int PROJECT_PHASE_PLANNINGPOKER = 1;
-    public final static int PROJECT_PHASE_PRIORITY = 2;
+    public final static Integer PROJECT_PHASE_DEFAULT = 0;
+    public final static Integer PROJECT_PHASE_PLANNINGPOKER = 1;
+    public final static Integer PROJECT_PHASE_PRIORITY = 2;
 
 
     @Id
@@ -25,6 +25,7 @@ public class Project {
 
     private String name;    //Name of project
     private String token;   //Token for project
+    private Integer projectPhase = Project.PROJECT_PHASE_DEFAULT;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     @OrderBy("created ASC")
@@ -110,6 +111,19 @@ public class Project {
         this.userStories = userStories;
     }
 
+    /**
+     * @return the projectPhase
+     */
+    public Integer getProjectPhase() {
+        return projectPhase;
+    }
+
+    /**
+     * @param projectPhase the projectPhase to set
+     */
+    public void setProjectPhase(Integer projectPhase) {
+        this.projectPhase = projectPhase;
+    }
 
 
     @Override

@@ -23,7 +23,12 @@
                         <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
                     </form>
                 </header>
+                
+                <a class="button" href="/estimation/priority/start">Start Priority Phase</a>
+                <a class="button" href="/estimation/planningpoker/start">Start Planning Poker Phase</a>
 
+                
+                
                 <a class="button" href="/userstory/create">Create New User story</a>
                 <!-- ALLAR USER STORIES FYRIR VERKEFNI -->
                 <c:choose>

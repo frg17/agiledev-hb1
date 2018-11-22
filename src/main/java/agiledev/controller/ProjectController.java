@@ -120,39 +120,6 @@ public class ProjectController {
     }
 
 
-    /**
-     * Displays the view for either planning poker 
-     * or priority according to which
-     * phase the project is in
-     */
-    @RequestMapping(value = "/estimation", method = RequestMethod.GET)
-    public String estimationView(
-        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
-        HttpServletResponse res,
-        Model model)
-    {
-
-        if (!this.auth.isAuthenticated(res, model)) return "redirect:/";
-
-        Project project = projectService.findOneByToken(projectToken);
-
-        List<UserStory> userStories = project.getUserStories();
-        
-        for(int i = 0; i < userStories.size(); i++) {
-            userStories.get(i).getPriorityEstimates(); //Þarf að sækja vegna LAZY fetch
-        }
-        
-        //Userstories fyrir view
-        model.addAttribute("userStories", userStories);
-
-        //Priority estimate fyrir form.
-        PriorityEstimate estimate = new PriorityEstimate();
-        estimate.setUserStory(new UserStory());
-        model.addAttribute("priorityEstimate", estimate);
-
-        return "estimation/estimation";
-    }
-
     /*
         DEBUG METHOD, REMOVE IN PROD
     */
