@@ -43,7 +43,6 @@
                             <hr>
                         </c:forEach>
 
-                        <input class="button" type="button"  onclick="location.href='/estimation'" value="Estimate the User Stories" >
                     </c:when>
 
                     <c:otherwise>

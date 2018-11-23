@@ -80,7 +80,19 @@
                                 <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
         
                                 <label for="planningPoker">Your estimation:</label>
-                                <sf:input path="estimate" type="number" id="planningPoker" min="1"></sf:input>
+                                <sf:select path="estimate" id="planningPoker" >
+                                    <option value="0">0</option>
+                                    <option value="0.5">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="5">5</option>
+                                    <option value="8">8</option>
+                                    <option value="13">13</option>
+                                    <option value="20">20</option>
+                                    <option value="40">40</option>
+                                    <option value="100">100</option>
+                                </sf:select>
                                 <input class="button" type="Submit" value="Submit estimate" />
                             </sf:form>
         

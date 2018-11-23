@@ -27,7 +27,8 @@
             <sf:textarea path="textContent" type="text" value="${userStory.textContent}"></sf:textarea><br>
             <label>Author: </label>
             <sf:input path="author" type="text" value="${userStory.author}"></sf:input><br>
-            <input type="Submit" value="Edit" />
+            <input class="button" type="Submit" value="Edit" />
+            <a class="button" href="../../">Go back</a>
         </sf:form>
     </body>
 </html>
