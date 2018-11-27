@@ -106,7 +106,7 @@ public class PlanningPokerController {
         List<UserStory> userStories =  project.getUserStories(); //Lazy fetch
 
         for(UserStory us : userStories) {
-            us.getPlanningPokerEstimates(); //Lazy fetch
+            List<PlanningPokerEstimate> estimates = us.getPlanningPokerEstimates(); //Lazy fetch
 
             Double ave = this.planningPokerService.findAverage(estimates); //finn average
     
