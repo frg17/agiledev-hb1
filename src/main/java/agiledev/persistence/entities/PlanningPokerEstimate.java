@@ -22,15 +22,18 @@ public class PlanningPokerEstimate {
     @ManyToOne(fetch = FetchType.LAZY)
     private UserStory userStory;
 
+    private String explanation;
+
     //Default constructor
     public PlanningPokerEstimate() {
         
     }
 
     //Constructor
-    public PlanningPokerEstimate(String member, Float estimate, Long userStoryId) {
+    public PlanningPokerEstimate(String member, Float estimate, String explanation, Long userStoryId) {
         this.member = member;
         this.estimate = estimate;
+        this.explanation = explanation;
     }
 
 
@@ -88,5 +91,13 @@ public class PlanningPokerEstimate {
      */
     public void setUserStory(UserStory userStory) {
         this.userStory = userStory;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public String getExplanation() {
+        return this.explanation;
     }
 }
