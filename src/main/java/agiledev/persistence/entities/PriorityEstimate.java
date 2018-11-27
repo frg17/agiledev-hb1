@@ -22,12 +22,15 @@ public class PriorityEstimate {
     @ManyToOne(fetch = FetchType.LAZY)
     private UserStory userStory;
 
+    private String explanation;
+
     public PriorityEstimate() {
     }
 
-    public PriorityEstimate (int estimate) {
+    public PriorityEstimate (int estimate, String explanation) {
 
         this.estimate = estimate;
+        this.explanation = explanation;
     }
 
     /**
@@ -70,5 +73,13 @@ public class PriorityEstimate {
      */
     public void setUserStory(UserStory userStory) {
         this.userStory = userStory;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public String getExplanation() {
+        return this.explanation;
     }
  }

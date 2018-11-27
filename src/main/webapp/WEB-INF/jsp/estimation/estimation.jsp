@@ -30,7 +30,11 @@
                                 <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
         
                                 <label for="priority">Your estimation:</label>
-                                <sf:input path="estimate" type="number" id="priority" min="1"></sf:input>
+                                <sf:input path="estimate" type="number" id="priority" min="0"></sf:input>
+                                <br/>
+                                <label for="explanation">Your explanation:</label>
+                                <sf:input path="explanation" type="text" id="explanation"></sf:input>
+                                <br/>
                                 <input class="button" type="Submit" value="Submit estimate" />
                             </sf:form>
         
@@ -38,6 +42,7 @@
         
                                     <sf:form method="DELETE" modelAttribute="priorityEstimate" action="/priority/estimate" accept-charset="UTF-8">
                                         <p>An estimate: ${estimate.estimate} </p>
+                                        <p>Explanation: ${estimate.explanation}</p>
                                         <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
                                         <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
                                         <input class="button" type="Submit" value="Delete this estimate" />
@@ -87,6 +92,10 @@
                                     <option value="40">40</option>
                                     <option value="100">100</option>
                                 </sf:select>
+                                <br/>
+                                <label for="planningPokerExplanation">Your explanation:</label>
+                                <sf:input path="explanation" type="text" id="explanation"></sf:input>
+                                <br/>
                                 <input class="button" type="Submit" value="Submit estimate" />
                             </sf:form>
         
@@ -94,6 +103,7 @@
         
                                     <sf:form method="DELETE" modelAttribute="planningPokerEstimate" action="/planningpoker/estimate" accept-charset="UTF-8">
                                         <p>An estimate: ${estimate.estimate} </p>
+                                        <p>Explanation: ${estimate.explanation}</p>
                                         <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
                                         <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
                                         <input class="button" type="Submit" value="Delete this estimate" />
@@ -103,7 +113,7 @@
                         </c:forEach>
         
                         <sf:form method="PATCH" modelAttribute="planningPokerEstimates" action="/planningpoker/finalizeEstimates" accept-charset="UTF-8">
-                            <input class="button" type="Submit" value="Finalize estimates" />
+                            <input class="button" type="Submit" value="Finalize Planning Poker" />
                         </sf:form>
         
                     </c:when>

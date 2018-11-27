@@ -21,7 +21,8 @@
             <sf:textarea path="textContent" type="text" value="${userStory.textContent}"></sf:textarea><br>
             <label>Author: </label>
             <sf:input path="author" type="text" value="${userStory.author}"></sf:input><br>
-            <input type="Submit" value="CREATE" />
+            <input type="Submit" value="Create" class="button" />
+            <a class="button" href="../../">Go back</a>
         </sf:form>
         <%@ include file="../SettingsTab.jspf" %>
     </body>

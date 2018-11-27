@@ -29,6 +29,7 @@
                         <c:forEach var="story" items="${userStories}">
                             <p>${story.textContent}</p>
                             <p>${story.author}</p>
+                            <p>Planning poker estimate: ${story.planningPokerPriority}</p>
                             <p>Priority: ${story.priority}</p>
                             <a class="button" href="/userstory/edit/${story.id}">Edit</a>
                             <hr>

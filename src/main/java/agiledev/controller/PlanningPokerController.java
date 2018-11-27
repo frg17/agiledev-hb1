@@ -108,6 +108,10 @@ public class PlanningPokerController {
         for(UserStory us : userStories) {
             us.getPlanningPokerEstimates(); //Lazy fetch
 
+            Double ave = this.planningPokerService.findAverage(estimates); //finn average
+    
+            us.setPlanningPokerPriority(ave);
+
             this.userStoryService.save(us);  //Uppfæri
         }
 

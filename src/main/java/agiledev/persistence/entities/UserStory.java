@@ -22,6 +22,7 @@ public class UserStory {
     private String author;
     private String textContent;
     private Integer priority;
+    private Double planningPokerPriority;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
@@ -39,6 +40,7 @@ public class UserStory {
     protected void onCreate() {
         this.created = new Date();
         this.priority = 0;
+        this.planningPokerPriority = 0.0;
     }
 
     //Default constructor
@@ -102,6 +104,21 @@ public class UserStory {
      */
     public void setPriority(Integer priority) {
         this.priority = priority;
+    }
+
+    /**
+     * @return planning poker priority
+     */
+    public Double getPlanningPokerPriority() {
+        return this.planningPokerPriority;
+    }
+
+    /**
+     * Setter for the planning poker priority
+     * @param planningPokerPriority
+     */
+    public void setPlanningPokerPriority(Double planningPokerPriority) {
+        this.planningPokerPriority = planningPokerPriority;
     }
 
     /**
