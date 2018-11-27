@@ -78,8 +78,6 @@ public class PriorityController {
 
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
-        System.out.println("!I!I!I!I!I!I" + estimate.getEstimate());
-
         UserStory us = userStoryService.findOneByIdAndProjectId(            //Validate-a að userstory id
             estimate.getUserStory().getId(), getProjectId(projectToken));   //tilheyri þessu verkefni
 
@@ -108,7 +106,7 @@ public class PriorityController {
         for(UserStory us : userStories) {
             List<PriorityEstimate> estimates = us.getPriorityEstimates(); //Lazy fetch
 
-            Integer ave = priorityService.findAverage(estimates);  //Finn average
+            Integer ave = this.priorityService.findAverage(estimates);  //Finn average
 
             us.setPriority(ave);  //Bæti við average í userstory
             this.userStoryService.save(us);  //Uppfæri

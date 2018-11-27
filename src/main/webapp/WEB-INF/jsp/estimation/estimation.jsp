@@ -109,7 +109,7 @@
                         </c:forEach>
         
                         <sf:form method="PATCH" modelAttribute="planningPokerEstimates" action="/planningpoker/finalizeEstimates" accept-charset="UTF-8">
-                            <input class="button" type="Submit" value="Finalize estimates" />
+                            <input class="button" type="Submit" value="Finalize Planning Poker" />
                         </sf:form>
         
                     </c:when>

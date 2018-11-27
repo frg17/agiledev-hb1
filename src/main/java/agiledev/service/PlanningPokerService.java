@@ -42,13 +42,17 @@ public class PlanningPokerService {
      * @param estimates
      * @return
      */
-    public Integer findAverage(List<PlanningPokerEstimate> estimates) {
-        if (estimates.size() == 0) return 0;
-        int sum = 0;
+    public Double findAverage(List<PlanningPokerEstimate> estimates) {
+        if (estimates.size() == 0) return 0.0;
+        double sum = 0;
         for (PlanningPokerEstimate es : estimates) {
             sum += es.getEstimate();
         }
 
-        return sum / estimates.size();
+        double answer = sum / estimates.size();
+        
+        // round to the nearest half value and return
+        
+        return Math.round(answer * 2) / 2.0;
     }
 }
