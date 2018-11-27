@@ -93,10 +93,16 @@ public class PlanningPokerEstimate {
         this.userStory = userStory;
     }
 
+    /**
+     * @param explanation for the estimate
+     */
     public void setExplanation(String explanation) {
         this.explanation = explanation;
     }
 
+    /**
+     * @return the estimate's explanation
+     */
     public String getExplanation() {
         return this.explanation;
     }
