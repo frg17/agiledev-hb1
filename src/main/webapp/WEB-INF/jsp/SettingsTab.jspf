@@ -3,11 +3,23 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <div class="settings--tab">
-
-    <a class="button" href="/estimation/priority/start">Start Priority Phase</a>
-    <a class="button" href="/estimation/planningpoker/start">Start Planning Poker Phase</a>
+    <c:choose>
+        <c:when test="${project.projectPhase=='1'}">
+            <a class="button" href="/estimation/planningpoker/start">Planning Poker Estimation</a>
+            <br />
+        </c:when>
+        <c:when test="${project.projectPhase=='2'}">
+            <a class="button" href="/estimation/priority/start">Priority Estimation</a>
+            <br />
+        </c:when>    
+        <c:otherwise>
+            <a class="button" href="/estimation/priority/start">Priority Estimation</a>
+            <a class="button" href="/estimation/planningpoker/start">Planning Poker Estimation</a>
+            <br />
+        </c:otherwise>
+    </c:choose>
     <form id="logout-form" method="POST" action="/projects/logout">
-                    <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
+        <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
     </form>
 </div>
 

@@ -105,6 +105,23 @@ public class UserStoryController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "userstory/delete", method = RequestMethod.DELETE)
+    public String deleteUser(
+        @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
+        HttpServletResponse res,
+
+        @ModelAttribute("userStory") UserStory userStory,
+        Model model        
+    ) {
+        if (!this.auth.isAuthenticated(res, model)) return "redirect:/";
+        userStory.setProject(getProject(projectToken));
+
+        this.userStoryService.delete(userStory);
+
+        return "redirect:/";
+    }
+
+
 
 
     /**

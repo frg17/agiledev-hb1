@@ -22,8 +22,10 @@
             <label>Author: </label>
             <sf:input path="author" type="text" value="${userStory.author}"></sf:input><br>
             <input type="Submit" value="Create" class="button" />
-            <a class="button" href="../../">Go back</a>
+            <a class="button" href="/">Go back</a>
         </sf:form>
+
+
         <%@ include file="../SettingsTab.jspf" %>
     </body>
 </html>

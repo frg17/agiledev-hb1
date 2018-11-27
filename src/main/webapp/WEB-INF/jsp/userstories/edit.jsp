@@ -24,8 +24,15 @@
             <label>Author: </label>
             <sf:input path="author" type="text" value="${userStory.author}"></sf:input><br>
             <input class="button" type="Submit" value="Edit" />
-            <a class="button" href="../../">Go back</a>
+            <a class="button" href="/">Go back</a>
         </sf:form>
+        
+        <sf:form method="DELETE" modelAttribute="userStory" action="/userstory/delete" accept-charset="UTF-8">
+            <sf:input path="id" type="hidden" value="${userStory.id}"/>
+            <input class="button" type="Submit" value="Delete">
+        </sf:form>
+
+
 
          <%@ include file="../SettingsTab.jspf" %>
     </body>

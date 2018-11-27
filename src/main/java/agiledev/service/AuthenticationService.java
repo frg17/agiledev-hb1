@@ -2,6 +2,7 @@ package agiledev.service;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -13,6 +14,9 @@ import org.springframework.ui.Model;
 @Component
 public class AuthenticationService {
 
+
+    private @Autowired ProjectService projectService;
+
     /**
      * Is called in a controller to check if user is authenticated.
      * Adds loggedIn attribute to a model
@@ -23,6 +27,7 @@ public class AuthenticationService {
     public boolean isAuthenticated(HttpServletResponse res, Model model) {
         String token = res.getHeader("authenticated");
         if (token != null) {
+            model.addAttribute("project", this.projectService.findByToken(token));
             model.addAttribute("loggedIn", true);
             return true;
         }

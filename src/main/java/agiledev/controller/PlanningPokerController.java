@@ -103,6 +103,10 @@ public class PlanningPokerController {
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
         Project project = this.projectService.findByToken(projectToken);
+
+        // skiptum yfir í phase 0 við að finalize-a
+        project.setProjectPhase(Project.PROJECT_PHASE_DEFAULT);
+        
         List<UserStory> userStories =  project.getUserStories(); //Lazy fetch
 
         for(UserStory us : userStories) {
