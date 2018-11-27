@@ -1,0 +1,13 @@
+.settings--tab {
+    display : none;
+    padding: 10px;
+
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    z-index: 10;
+    border-style: outset;
+    background: #fff;
+}
+

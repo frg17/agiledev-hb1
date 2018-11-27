@@ -1,0 +1,13 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
+<div class="settings--tab">
+
+    <a class="button" href="/estimation/priority/start">Start Priority Phase</a>
+    <a class="button" href="/estimation/planningpoker/start">Start Planning Poker Phase</a>
+    <form id="logout-form" method="POST" action="/projects/logout">
+                    <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
+    </form>
+</div>
+

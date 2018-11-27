@@ -5,20 +5,14 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <html lang="en">
-
     <head>
         <title>Priority Page</title>
 
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
+        <script src="<c:url value="/js/script.js"/>"/> </script>
     </head>
     <body>
-        <header>
-            <form id="logout-form" method="POST" action="/projects/logout">
-                <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
-            </form>
-        </header>
-
-        
+        <%@ include file="../Header.jspf" %>
 
         <c:choose>
             <c:when test="${phase == 1}"> <%-- FOR PRIORITY ESTIMATES --%>
@@ -124,7 +118,7 @@
 
         </c:choose>
 
-
+        <%@ include file="../SettingsTab.jspf" %>
 
 
         

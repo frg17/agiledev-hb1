@@ -10,15 +10,11 @@
         <title>Edit user story</title>
 
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>">
-        <script src="<c:url value="/js/hehe.js"/>"/> </script>
+        <script src="<c:url value="/js/script.js"/>"/> </script>
     </head>
     
     <body>
-        <header>
-                <form id="logout-form" method="POST" action="/projects/logout">
-                    <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
-                </form>
-        </header>
+        <%@ include file="../Header.jspf" %>
         <h1>Create user story</h1>
         
         <sf:form method="POST" modelAttribute="userStory" action="/userstory/create" accept-charset="UTF-8">
@@ -27,5 +23,6 @@
             <sf:input path="author" type="text" value="${userStory.author}"></sf:input><br>
             <input type="Submit" value="CREATE" />
         </sf:form>
+        <%@ include file="../SettingsTab.jspf" %>
     </body>
 </html>

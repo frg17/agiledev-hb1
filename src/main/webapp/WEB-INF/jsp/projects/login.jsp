@@ -10,7 +10,6 @@
         <title>Project Party</title>
 
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
-        <script src="<c:url value="/js/hehe.js"/>"/> </script>
     </head>
     <body>
 

@@ -106,7 +106,7 @@ public class PlanningPokerController {
         List<UserStory> userStories =  project.getUserStories(); //Lazy fetch
 
         for(UserStory us : userStories) {
-            List<PlanningPokerEstimate> estimates = us.getPlanningPokerEstimates(); //Lazy fetch
+            us.getPlanningPokerEstimates(); //Lazy fetch
 
             this.userStoryService.save(us);  //Uppfæri
         }

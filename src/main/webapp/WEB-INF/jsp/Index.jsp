@@ -10,24 +10,15 @@
         <title>Project Title</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
-        <script src="<c:url value="/js/hehe.js"/>"/> </script>
+        <script src="<c:url value="/js/script.js"/>"/> </script>
     </head>
 
     <body>
         <c:choose>
             <c:when test="${loggedIn}">
-                <h1>User Stories</h1>
-                
-                <header>
-                    <form id="logout-form" method="POST" action="/projects/logout">
-                        <a class="button" onclick="document.getElementById('logout-form').submit();">Log out</a>
-                    </form>
-                </header>
-                
-                <a class="button" href="/estimation/priority/start">Start Priority Phase</a>
-                <a class="button" href="/estimation/planningpoker/start">Start Planning Poker Phase</a>
-
-                
+            
+            <%@ include file="./Header.jspf" %>
+            <h1>User Stories</h1>
                 
                 <a class="button" href="/userstory/create">Create New User story</a>
                 <!-- ALLAR USER STORIES FYRIR VERKEFNI -->
@@ -56,7 +47,8 @@
                 
             </c:otherwise>
         </c:choose>
-        
+
+        <%@ include file="./SettingsTab.jspf" %>
     
         <footer>Class HBV501G, University of Iceland</footer>
     </body>

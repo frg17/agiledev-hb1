@@ -9,8 +9,8 @@ html {
 }
 
 body {
+    position: relative;
     min-height: 100vh;
-    padding: 50px;
 }
 
 footer {
@@ -22,5 +22,7 @@ a {
     cursor: pointer;
 }
 
+
 @import 'header';
 @import 'button';
+@import 'settings';

@@ -1,3 +1,13 @@
-p {
-    font-size: 14
+header {
+    position: relative;
+    height: 50px;
+    width: 100%;
+
+    h3 {
+        display: inline-block;
+    }
+}
+
+#logout-form {
+    display: inline-block;
 }
