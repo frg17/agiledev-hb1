@@ -114,6 +114,7 @@
                                 <directory>${project.basedir}/src/main/resources/sass</directory>
                             </source>
                             <destination>${project.basedir}/src/main/resources/static/css</destination>
+                            <destination>${project.basedir}/target/classes/static/css</destination>
                         </resource>
                     </resources>
                 </configuration>

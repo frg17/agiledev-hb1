@@ -1,0 +1,75 @@
+.stories, .menu__markings {
+    border: 1px solid #000;
+    width: 60%;
+    min-width: 450px;
+
+}
+
+.index__col {
+    width: 60%;
+}
+
+.story {   
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+
+    &__text-content {
+        width: 65%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__editing {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    &__author {
+        font-style: italic;
+        font-size: 0.8rem;
+        margin-top: 10px;
+    }
+
+    &__numbers {
+        width: 35%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        & * {
+            width: 50%;
+            text-align: center;
+            border-left: 1px solid black;
+        }
+    }
+}
+
+.menu {
+    &__story-button {
+        max-width: 30%;
+    }
+    &__markings {
+        display: flex;
+        flex-direction: row;
+
+    }
+}
+
+.markings {
+    &__title {
+        width: 65%;
+    }
+    &__numbers {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 35%;
+        & * {
+            width: 50%;
+            text-align: center;
+        }
+    }
+}

@@ -5,151 +5,208 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <html lang="en">
-    <head>
-        <title>Priority Page</title>
 
-        <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/>
-        <script src="<c:url value="/js/script.js"/>"/> </script>
-    </head>
-    <body>
+<head>
+    <title>Priority Page</title>
+
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/styles.css'/>" />
+    <script src="<c:url value='/js/script.js'/>" />
+    </script>
+</head>
+
+<body>
+    <div class='view__container'>
         <%@ include file="../Header.jspf" %>
-        <c:choose>
-            <c:when test="${phase == 1}"> <%-- FOR PRIORITY ESTIMATES --%>
+
+        <div class='view__row'>
+            <div class='view__col'>
+
                 <c:choose>
-                    <c:when test="${not empty userStories}">
-                        <h1>Estimate the priorities</h1>
-                        <hr>
-                        <c:forEach var="story" items="${userStories}">
-                            <p>User Story:</p>
-                            <p>${story.textContent}</p>
-                            <p>${story.author}</p>
-        
-                            
-                            <sf:form method="POST" modelAttribute="priorityEstimate" action="/priority/estimate" accept-charset="UTF-8">
-                                <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
-        
-                                <label for="priority">Your estimation:</label>
-                                <sf:select path="estimate" id="priority" >
-                                    <option value="0">0</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="40">40</option>
-                                    <option value="50">50</option>
-                                    <option value="60">60</option>
-                                    <option value="70">70</option>
-                                    <option value="80">80</option>
-                                    <option value="90">90</option>
-                                    <option value="100">100</option>
-                                </sf:select>
-                                <br/>
-                                <label for="explanation">Your explanation:</label>
-                                <sf:input path="explanation" type="text" id="explanation"></sf:input>
-                                <br/>
-                                <input class="button" type="Submit" value="Submit estimate" />
-                            </sf:form>
-                            <div class="estimates">
-                                <c:forEach var="estimate" items="${story.priorityEstimates}">
-                                <div class="estimate" id="${estimate.id}">
-                                    <p class="estimate__nr">An estimate: ${estimate.estimate} </p>
-                                    <p class="estimate__explanation" style="display: none;">Explanation: ${estimate.explanation}</p>
-                                    <sf:form method="DELETE" modelAttribute="priorityEstimate" action="/priority/estimate" accept-charset="UTF-8">
-                                        <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
-                                        <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
-                                        <input class="button" type="Submit" value="Delete this estimate" />
-                                    </sf:form>
+                    <c:when test="${phase == 1}">
+                        <%-- FOR PRIORITY ESTIMATES --%>
+                        <c:choose>
+                            <c:when test="${not empty userStories}">
+
+                                <div class='priority'>
+                                    <h1>Estimate the priorities test</h1>
+                                    <hr>
+                                    <div class='estimates__outer'>
+                                        <c:forEach var="story" items="${userStories}">
+                                            <div class='estimation'>
+                                                <div class='story estimation__story'>
+                                                    <p>User Story:</p>
+                                                    <div class='story__text-content'>
+                                                        <p class='story__text'>${story.textContent}</p>
+                                                        <p class='story__author'>Author: ${story.author}</p>
+                                                    </div>
+                                                </div>
+
+                                                <sf:form class='estimation__form' method="POST" modelAttribute="priorityEstimate"
+                                                    action="/priority/estimate" accept-charset="UTF-8">
+                                                    <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
+                                                    <div class='estimation__choice'>
+                                                        <label class='estimation__label' for="priority">Estimation:</label>
+                                                        <sf:select path="estimate" id="priority">
+                                                            <option value="0">0</option>
+                                                            <option value="10">10</option>
+                                                            <option value="20">20</option>
+                                                            <option value="30">30</option>
+                                                            <option value="40">40</option>
+                                                            <option value="50">50</option>
+                                                            <option value="60">60</option>
+                                                            <option value="70">70</option>
+                                                            <option value="80">80</option>
+                                                            <option value="90">90</option>
+                                                            <option value="100">100</option>
+                                                        </sf:select>
+
+                                                    </div>
+
+                                                    <div class='estimation__explanation'>
+                                                        <label for="explanation">Explanation:</label>
+                                                        <sf:textarea class='explanation__input' path="explanation" type="text"
+                                                            id="explanation"></sf:textarea>
+                                                    </div>
+                                                    <input class="button estimation__submit" type="Submit" value="Submit" />
+                                                </sf:form>
+                                                <div class="estimates__inner">
+                                                    <c:forEach var="estimate" items="${story.priorityEstimates}">
+                                                        <div class="estimate" id="${estimate.id}">
+                                                            <div class='estimate__info'>
+                                                                <p class="estimate__nr">Estimate: ${estimate.estimate}</p>
+                                                                <div class="estimate__explanation" style="display: none;">Explanation:
+                                                                    <p class='explanation__text'>
+                                                                        ${estimate.explanation}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <sf:form method="DELETE" modelAttribute="priorityEstimate"
+                                                                action="/priority/estimate" accept-charset="UTF-8">
+                                                                <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
+                                                                <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
+                                                                <input class="button estimate__delete" type="Submit"
+                                                                    value="Delete" />
+                                                            </sf:form>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+
+                                        <sf:form method="PATCH" modelAttribute="priorityEstimates" action="priority/finalizeEstimates"
+                                            accept-charset="UTF-8">
+                                            <input class="button" type="Submit" value="Finalize estimates" />
+                                        </sf:form>
+                                    </div>
                                 </div>
-                                </c:forEach>
-                            </div>
-                                
-                        <hr>
-                        </c:forEach>
-        
-                        <sf:form method="PATCH" modelAttribute="priorityEstimates" action="priority/finalizeEstimates" accept-charset="UTF-8">
-                            <input class="button" type="Submit" value="Finalize estimates" />
-                        </sf:form>
-        
+
+                            </c:when>
+                            <c:otherwise>
+                                <p><b>No user stories!</b></p>
+                                <input class="button" type="button" onclick="location.href='/userstory/create'" value="Create the first one">
+                            </c:otherwise>
+
+                        </c:choose>
+
                     </c:when>
-                    <c:otherwise>
-                        <p><b>No user stories!</b></p>
-                        <input class="button" type="button"  onclick="location.href='/userstory/create'" value="Create the first one" >
-                    </c:otherwise>
-        
+                    <c:when test="${phase == 2}">
+                        <%-- FOR PLANNING POKER ESTIMATES --%>
+                        <c:choose>
+                            <c:when test="${not empty userStories}">
+
+                                <div class='priority'>
+                                    <h1>Planning Poker Party Time</h1>
+                                    <div class='estimates__outer'>
+
+                                        <hr>
+                                        <c:forEach var="story" items="${userStories}">
+                                            <div class='estimation'>
+                                                <div class='story estimation__story'>
+                                                    <p>User Story:</p>
+                                                    <div class='story__text-content'>
+                                                        <p class='story__text'>${story.textContent}</p>
+                                                        <p class='story__author'>Author: ${story.author}</p>
+                                                    </div>
+                                                </div>
+                                                <sf:form class='estimation__form' method="POST" modelAttribute="planningPokerEstimate" action="/planningpoker/estimate"
+                                                    accept-charset="UTF-8">
+                                                    <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
+                                                    <div class='estimation__choice'>
+                                                        <label for="planningPoker">Your estimation:</label>
+                                                        <sf:select path="estimate" id="planningPoker">
+                                                            <option value="0">0</option>
+                                                            <option value="0.5">1/2</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="5">5</option>
+                                                            <option value="8">8</option>
+                                                            <option value="13">13</option>
+                                                            <option value="20">20</option>
+                                                            <option value="40">40</option>
+                                                            <option value="100">100</option>
+                                                        </sf:select>
+                                                    </div>
+
+                                                    <div class='estimation__explanation'>
+                                                        <label for="planningPokerExplanation">Your explanation:</label>
+                                                        <sf:textarea class='explanation__input' path="explanation" type="text"
+                                                            id="explanation"></sf:textarea>
+
+                                                    </div>
+                                                    <input class="button" type="Submit" value="Submit estimate" />
+                                                </sf:form>
+                                                <div class="estimates__inner">
+                                                    <c:forEach var="estimate" items="${story.planningPokerEstimates}">
+                                                        <div class="estimate" id="$estimate.id">
+                                                            <div class='estimate__info'>
+                                                                <p class="estimate__nr">Estimate: ${estimate.estimate}</p>
+                                                                <div class="estimate__explanation" style="display: none;">Explanation:
+                                                                    <p class='explanation__text'>
+                                                                        ${estimate.explanation}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <sf:form method="DELETE" modelAttribute="planningPokerEstimate"
+                                                                action="/planningpoker/estimate" accept-charset="UTF-8">
+                                                                <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
+                                                                <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
+                                                                <input class="button estimate__delete" type="Submit"
+                                                                    value="Delete this estimate" />
+                                                            </sf:form>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </c:forEach>
+
+                                        <sf:form method="PATCH" modelAttribute="planningPokerEstimates" action="/planningpoker/finalizeEstimates"
+                                            accept-charset="UTF-8">
+                                            <input class="button" type="Submit" value="Finalize Planning Poker" />
+                                        </sf:form>
+
+                                    </div>
+                                </div>
+
+                            </c:when>
+                            <c:otherwise>
+                                <p><b>No user stories!</b></p>
+                                <input class="button" type="button" onclick="location.href='/userstory/create'" value="Create the first one">
+                            </c:otherwise>
+
+                        </c:choose>
+
+                    </c:when>
                 </c:choose>
 
-            </c:when>
-
-            <c:when test="${phase == 2}"> <%-- FOR PLANNING POKER ESTIMATES --%>
-                <c:choose>
-                    <c:when test="${not empty userStories}">
-                        <h1>Planning Poker Party Time</h1>
-                        <c:forEach var="story" items="${userStories}">
-                            <p>User Story:</p>
-                            <p>${story.textContent}</p>
-                            <p>${story.author}</p>
-        
-                            
-                            <sf:form method="POST" modelAttribute="planningPokerEstimate" action="/planningpoker/estimate" accept-charset="UTF-8">
-                                <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
-        
-                                <label for="planningPoker">Your estimation:</label>
-                                <sf:select path="estimate" id="planningPoker" >
-                                    <option value="0">0</option>
-                                    <option value="0.5">1/2</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="5">5</option>
-                                    <option value="8">8</option>
-                                    <option value="13">13</option>
-                                    <option value="20">20</option>
-                                    <option value="40">40</option>
-                                    <option value="100">100</option>
-                                </sf:select>
-                                <br/>
-                                <label for="planningPokerExplanation">Your explanation:</label>
-                                <sf:input path="explanation" type="text" id="explanation"></sf:input>
-                                <br/>
-                                <input class="button" type="Submit" value="Submit estimate" />
-                            </sf:form>
-
-
-                            <div class="estimates">
-                                <c:forEach var="estimate" items="${story.planningPokerEstimates}">
-                                    <div class="estimate" id="$estimate.id">
-                                        <p>An estimate: ${estimate.estimate} </p>
-                                        <p class="estimate__explanation" style="display: none;">Explanation: ${estimate.explanation}</p>
-                                        <sf:form method="DELETE" modelAttribute="planningPokerEstimate" action="/planningpoker/estimate" accept-charset="UTF-8">
-                                            <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
-                                            <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
-                                            <input class="button" type="Submit" value="Delete this estimate" />
-                                        </sf:form> 
-                                    </div>                                   
-                                </c:forEach>
-                            </div>  
-                            <hr>
-                        </c:forEach>
-        
-                        <sf:form method="PATCH" modelAttribute="planningPokerEstimates" action="/planningpoker/finalizeEstimates" accept-charset="UTF-8">
-                            <input class="button" type="Submit" value="Finalize Planning Poker" />
-                        </sf:form>
-        
-                    </c:when>
-                    <c:otherwise>
-                        <p><b>No user stories!</b></p>
-                        <input class="button" type="button"  onclick="location.href='/userstory/create'" value="Create the first one" >
-                    </c:otherwise>
-        
-                </c:choose>
-
-            </c:when>
-
-        </c:choose>
+            </div>
+        </div>
 
         <%@ include file="../SettingsTab.jspf" %>
 
 
-        
-    </body>
+    </div>
+</body>
 
 </html>
