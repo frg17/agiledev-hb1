@@ -20,30 +20,22 @@
     <%@ include file="../Header.jspf" %>
     <%@ include file="../SettingsTab.jspf" %>
     <main class="main">
-            <div class='view__row'>
-                
-                <div class='view__col'>
-                    
-            <h1>Create user story</h1>
-                    <div class='write'>
-                        <div class='write__row'>
-                            <div class='write__col'>
-    
-                                <sf:form class='write__form' method="POST" modelAttribute="userStory" action="/userstory/create" accept-charset="UTF-8">
-                                    <label>User story: </label>
-                                    <sf:textarea path="textContent" class="write__form__text" type="text" value="${userStory.textContent}"></sf:textarea>
-                                    <label>Author: </label>
-                                    <sf:input path="author" type="text" value="${userStory.author}"></sf:input>
-                                    <input type="Submit" value="Create" class="button" />
-                                    <a class="button" href="/">Go back</a>
-                                </sf:form>
-
-                            </div>
+            <h1 class="heading--create">Create user story</h1>
+            <div class='write'>
+                <sf:form class='write__form' method="POST" modelAttribute="userStory" action="/userstory/create" accept-charset="UTF-8">
+                    <label>User story: </label>
+                    <sf:textarea path="textContent" class="write__form__text" type="text" value="${userStory.textContent}"></sf:textarea>
+                    <div class="write__author">
+                        <label>Author: </label>
+                        <sf:input path="author" type="text" value="${userStory.author}"></sf:input>
+                        <div class="container--buttons">
+                            <input type="Submit" value="Create" class="button" />
+                            <a class="button" href="/">Go back</a>
                         </div>
                     </div>
-                </div>
+                    
+                </sf:form>
             </div>
-            
     </main>
 
     <%@ include file="../footer.jspf" %>

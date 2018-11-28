@@ -21,36 +21,29 @@
         <%@ include file="../SettingsTab.jspf" %>
 
         <main class="main">
-                <div class='view__row'>
-                    <div class='view__col'>
-                        <h1>Edit user story</h1>
-                        <div class='write'>
-                            <div class='write__row'>
-                                <div class='write__col'>
-        
-                                    <sf:form class='write__form' method="PATCH" modelAttribute="userStory" action="/userstory/edit"
-                                        accept-charset="UTF-8">
-                                        <sf:input path="id" type="hidden" value="${userStory.id}" />
-                                        <label>User story: </label>
-                                        <sf:textarea path="textContent" type="text" value="${userStory.textContent}"></sf:textarea>
-                                        <label>Author: </label>
-                                        <sf:input path="author" type="text" value="${userStory.author}"></sf:input>
-                                        <input class="button" type="Submit" value="Edit" />
-                                        <a class="button" href="/">Go back</a>
-                                    </sf:form>
-        
-                                    <sf:form method="DELETE" modelAttribute="userStory" action="/userstory/delete"
-                                        accept-charset="UTF-8">
-                                        <sf:input path="id" type="hidden" value="${userStory.id}" />
-                                        <input class="button" type="Submit" value="Delete">
-                                    </sf:form>
-        
-        
-        
-                                </div>
-                            </div>
+            <h1 class="heading--create">Edit user story</h1>
+            <div class='write'>
+                <sf:form class='write__form' method="PATCH" modelAttribute="userStory" action="/userstory/edit"
+                    accept-charset="UTF-8">
+                    <sf:input path="id" type="hidden" value="${userStory.id}" />
+                    <label>User story: </label>
+                    <sf:textarea path="textContent" type="text" value="${userStory.textContent}"></sf:textarea>
+                    <div class="write__author">
+                        <label>Author: </label>
+                        <sf:input path="author" type="text" value="${userStory.author}"></sf:input>
+                        <div class="container--buttons">
+                            <input class="button" type="Submit" value="Edit" />
+                            <sf:form method="DELETE" modelAttribute="userStory" action="/userstory/delete"
+                                accept-charset="UTF-8">
+                                <sf:input path="id" type="hidden" value="${userStory.id}" />
+                                <input class="button" type="Submit" value="Delete">
+                            </sf:form>
+                        <a class="button" href="/">Go back</a>
                         </div>
                     </div>
+                </sf:form>
+
+                    
                 </div>
         
 
