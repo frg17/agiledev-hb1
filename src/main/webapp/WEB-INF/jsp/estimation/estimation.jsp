@@ -116,7 +116,7 @@
                                     <c:when test="${not empty userStories}">
         
                                         <div class='priority'>
-                                            <h1>Planning Poker Party Time</h1>
+                                            <h1>Planning Poker</h1>
                                             <div class='estimates__outer'>
         
                                                 <c:forEach var="story" items="${userStories}">
