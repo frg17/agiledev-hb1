@@ -38,13 +38,15 @@ public class Application {
         Project pro = new Project("blarg", "blorg");
 
         UserStory us = new UserStory();
-        us.setAuthor("Frozen");
-        us.setTextContent("ocean");
+        us.setAuthor("Jón");
+        us.setTextContent("As a passenger, I want to submit a review for a flight I have been on, "
+                            + "in order to express my commendation or frustration to someone.");
         us.setProject(pro);
 
         UserStory us2 = new UserStory();
-        us2.setAuthor("Frozen Ocean");
-        us2.setTextContent("Geggjað R&B nafn cuz Frank Ocean cuz");
+        us2.setAuthor("Gunna");
+        us2.setTextContent("As a webmaster, I want to check reviews before they appear on the website, "
+                            + "to ensure they do not contain spam.");
         us2.setProject(pro);
 
         return args -> { 
