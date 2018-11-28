@@ -113,6 +113,10 @@ public class ProjectController {
     public String createProjectPOST(@ModelAttribute("project") Project project,
                                 Model model) 
     {
+        if(project.getToken() == null || project.getToken().equals("")) {
+            return "redirect:/projects/create";
+        }
+
         this.projectService.save(project);
 
         return "redirect:/";

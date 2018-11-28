@@ -31,7 +31,6 @@
         
                                         <div class='priority'>
                                             <h1>Estimate the priorities test</h1>
-                                            <hr>
                                             <div class='estimates__outer'>
                                                 <c:forEach var="story" items="${userStories}">
                                                     <div class='estimation'>
@@ -180,7 +179,6 @@
                                                             </c:forEach>
                                                         </div>
                                                     </div>
-                                                    <hr>
                                                 </c:forEach>
         
                                                 <sf:form method="PATCH" modelAttribute="planningPokerEstimates" action="/planningpoker/finalizeEstimates"

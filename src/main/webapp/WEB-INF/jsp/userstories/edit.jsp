@@ -33,14 +33,21 @@
                         <sf:input path="author" type="text" value="${userStory.author}"></sf:input>
                         <div class="container--buttons">
                             <input class="button" type="Submit" value="Edit" />
-                            <sf:form method="DELETE" modelAttribute="userStory" action="/userstory/delete"
-                                accept-charset="UTF-8">
-                                <sf:input path="id" type="hidden" value="${userStory.id}" />
-                                <input class="button" type="Submit" value="Delete">
-                            </sf:form>
                         <a class="button" href="/">Go back</a>
+                        <button id="deleteUserStoryButton" class="button">Delete</button>
+                        <script>
+                        document.getElementById("deleteUserStoryButton").addEventListener("click", function(e) {
+                            e.preventDefault();
+                            document.getElementById("deleteUserStory").submit();
+                        });
+                        </script>
                         </div>
                     </div>
+                </sf:form>
+                <sf:form style="display: none" id="deleteUserStory" method="DELETE" modelAttribute="userStory" action="/userstory/delete"
+                                accept-charset="UTF-8">
+                    <sf:input path="id" type="hidden" value="${userStory.id}" />
+                    <input class="button" type="Submit" value="Delete">
                 </sf:form>
 
                     
