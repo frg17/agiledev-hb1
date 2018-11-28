@@ -1,8 +1,10 @@
 .button {
-    display : inline-block; 
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
     padding : 5px;
     border-radius : 5px;
-    background-color : #003249;
+    background-color : #08415C;
     color : #FFF;
     text-decoration : none;
     text-align: center;
