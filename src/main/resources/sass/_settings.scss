@@ -12,3 +12,15 @@
 .settings--tab .button {
     margin-left: 10px;
 }
+
+.estimates__outer {
+    border-radius: 5px;
+    border: 1px solid #333;
+    padding: 10px;
+
+    + form {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

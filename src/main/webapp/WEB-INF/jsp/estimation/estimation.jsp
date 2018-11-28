@@ -94,11 +94,11 @@
                                                     </div>
                                                 </c:forEach>
         
-                                                <sf:form method="PATCH" modelAttribute="priorityEstimates" action="priority/finalizeEstimates"
+                                            </div>
+                                            <sf:form method="PATCH" modelAttribute="priorityEstimates" action="priority/finalizeEstimates"
                                                     accept-charset="UTF-8">
                                                     <input class="button" type="Submit" value="Finalize estimates" />
                                                 </sf:form>
-                                            </div>
                                         </div>
         
                                     </c:when>
@@ -119,7 +119,6 @@
                                             <h1>Planning Poker Party Time</h1>
                                             <div class='estimates__outer'>
         
-                                                <hr>
                                                 <c:forEach var="story" items="${userStories}">
                                                     <div class='estimation'>
                                                         <div class='story estimation__story'>
@@ -181,12 +180,11 @@
                                                     </div>
                                                 </c:forEach>
         
-                                                <sf:form method="PATCH" modelAttribute="planningPokerEstimates" action="/planningpoker/finalizeEstimates"
+                                            </div>
+                                            <sf:form method="PATCH" modelAttribute="planningPokerEstimates" action="/planningpoker/finalizeEstimates"
                                                     accept-charset="UTF-8">
                                                     <input class="button" type="Submit" value="Finalize Planning Poker" />
                                                 </sf:form>
-        
-                                            </div>
                                         </div>
         
                                     </c:when>
