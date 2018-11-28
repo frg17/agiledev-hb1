@@ -78,10 +78,19 @@
         margin-right: 5px; 
         white-space: nowrap;
         overflow: hidden;
+        position: relative;
+    }
+
+    &__explanation {
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+        width: 120px;
+        text-align: center;
+        padding: 5px 0;
+        margin: 30px;
+        background-color: #6096ba;
+        border-radius: 5px; 
+        word-wrap: break-word;
     }
 }
-
-
-.explanation__input {
-}
-

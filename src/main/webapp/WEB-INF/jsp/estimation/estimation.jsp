@@ -84,8 +84,10 @@
                                                                         action="/priority/estimate" accept-charset="UTF-8">
                                                                         <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
                                                                         <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
-                                                                        <input class="button estimate__delete" type="Submit"
-                                                                            value="Delete" />
+                                                                        <Button class="button estimate__delete" type="Submit"
+                                                                            value="Delete this estimate" >
+                                                                            <image src="<c:url value="/img/garbage.png"/>" alt="Delete"></image>
+                                                                        </Button>
                                                                     </sf:form>
                                                                 </div>
                                                             </c:forEach>
@@ -169,8 +171,10 @@
                                                                         action="/planningpoker/estimate" accept-charset="UTF-8">
                                                                         <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
                                                                         <sf:input path="id" type="hidden" value="${estimate.id}"></sf:input>
-                                                                        <input class="button estimate__delete" type="Submit"
-                                                                            value="Delete this estimate" />
+                                                                        <Button class="button estimate__delete" type="Submit"
+                                                                            value="Delete this estimate" >
+                                                                            <image src="<c:url value="/img/garbage.png"/>" alt="Delete"></image>
+                                                                        </Button>
                                                                     </sf:form>
                                                                 </div>
                                                             </c:forEach>
