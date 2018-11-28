@@ -21,8 +21,6 @@
         <%@ include file="./Header.jspf" %>
 
         <main class="main">
-                <div class='view__row'>
-                    <div class='view__col index__col'>
                         <div class='menu__markings'>
                             <h1 class='markings__title'>User Stories</h1>
                             <div class='markings__numbers'>
@@ -36,7 +34,6 @@
                                     <!-- ALLAR USER STORIES FYRIR VERKEFNI -->
                                     <c:choose>
                                         <c:when test="${not empty userStories}">
-                                            <hr class='stories__spacer'>
                                             <c:forEach var="story" items="${userStories}">
                                                 <div class='story'>
                                                     <div class='story__text-content'>
@@ -51,7 +48,6 @@
                                                         <p class='story__priority'>${story.priority}</p>
                                                     </div>
                                                 </div>
-                                                <hr class='stories__spacer'>
                                             </c:forEach>
                                         </c:when>
                                         <c:otherwise>
@@ -66,8 +62,6 @@
                             </c:otherwise>
                         </c:choose>
                         <a class="button menu__story-button" href="/userstory/create">Create New User story</a>
-                    </div>
-                </div>
         </main>
 
         <%@ include file="./footer.jspf" %>

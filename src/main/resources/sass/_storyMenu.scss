@@ -1,8 +1,12 @@
-.stories, .menu__markings {
-    border: 1px solid #000;
-    width: 60%;
-    min-width: 450px;
+.stories {
+}
 
+.stories, .menu__markings {
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: 70%;
+    min-width: 450px;
+    margin: 5px auto;
 }
 
 .index__col {
@@ -10,13 +14,13 @@
 }
 
 .story {   
-    padding: 5px;
     display: flex;
     flex-direction: row;
 
     &__text-content {
         width: 65%;
         height: 100%;
+        padding: 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -38,18 +42,25 @@
         width: 35%;
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
-        & * {
-            width: 50%;
-            text-align: center;
-            border-left: 1px solid black;
+        justify-content: space-around;
+
+        & p {
+            display: flex;
+            align-content: center;  
+            align-items: center;
         }
+
+    }
+
+    &:nth-child(2n) {
+        background: rgba(96, 150, 186, 0.1);
     }
 }
 
 .menu {
     &__story-button {
-        max-width: 30%;
+        margin: auto;
+        width: fit-content;
     }
     &__markings {
         display: flex;
@@ -60,16 +71,17 @@
 
 .markings {
     &__title {
+        padding-left: 10px;
         width: 65%;
     }
+
     &__numbers {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-around;
         width: 35%;
-        & * {
-            width: 50%;
-            text-align: center;
-        }
+
     }
+
+
 }

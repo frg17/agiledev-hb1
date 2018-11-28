@@ -13,7 +13,7 @@
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>"/> 
-    </head> 
+    </head>
     
     <body>
     <%@ include file="../Header.jspf" %>

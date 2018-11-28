@@ -201,9 +201,9 @@
                     </div>
                 </div>
         
+        </main>
+        
         <%@ include file="../footer.jspf" %>    
-    </main>
-    
 </body>
 
 </html>
