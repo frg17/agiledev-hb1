@@ -67,6 +67,12 @@ textarea {
     resize: none;
 }
 
+p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 @import 'header';
 @import 'button';
