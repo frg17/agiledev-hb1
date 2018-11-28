@@ -156,7 +156,7 @@
                                                                     id="explanation"></sf:textarea>
         
                                                             </div>
-                                                            <input class="button" type="Submit" value="Submit estimate" />
+                                                            <input class="button estimation__submit" type="Submit" value="Submit estimate" />
                                                         </sf:form>
                                                         <div class="estimates">
                                                             <c:forEach var="estimate" items="${story.planningPokerEstimates}">
