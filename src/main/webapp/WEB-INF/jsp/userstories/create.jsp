@@ -31,7 +31,7 @@
     
                                 <sf:form class='write__form' method="POST" modelAttribute="userStory" action="/userstory/create" accept-charset="UTF-8">
                                     <label>User story: </label>
-                                    <sf:textarea path="textContent" type="text" value="${userStory.textContent}"></sf:textarea>
+                                    <sf:textarea path="textContent" class="write__form__text" type="text" value="${userStory.textContent}"></sf:textarea>
                                     <label>Author: </label>
                                     <sf:input path="author" type="text" value="${userStory.author}"></sf:input>
                                     <input type="Submit" value="Create" class="button" />

@@ -71,17 +71,15 @@
                                                             </div>
                                                             <input class="button estimation__submit" type="Submit" value="Submit" />
                                                         </sf:form>
-                                                        <div class="estimates__inner">
+                                                        <div class="estimates">
                                                             <c:forEach var="estimate" items="${story.priorityEstimates}">
                                                                 <div class="estimate" id="${estimate.id}">
-                                                                    <div class='estimate__info'>
                                                                         <p class="estimate__nr">Estimate: ${estimate.estimate}</p>
                                                                         <div class="estimate__explanation" style="display: none;">Explanation:
                                                                             <p class='explanation__text'>
                                                                                 ${estimate.explanation}
                                                                             </p>
                                                                         </div>
-                                                                    </div>
                                                                     <sf:form method="DELETE" modelAttribute="priorityEstimate"
                                                                         action="/priority/estimate" accept-charset="UTF-8">
                                                                         <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>
@@ -158,17 +156,15 @@
                                                             </div>
                                                             <input class="button" type="Submit" value="Submit estimate" />
                                                         </sf:form>
-                                                        <div class="estimates__inner">
+                                                        <div class="estimates">
                                                             <c:forEach var="estimate" items="${story.planningPokerEstimates}">
                                                                 <div class="estimate" id="$estimate.id">
-                                                                    <div class='estimate__info'>
                                                                         <p class="estimate__nr">Estimate: ${estimate.estimate}</p>
                                                                         <div class="estimate__explanation" style="display: none;">Explanation:
                                                                             <p class='explanation__text'>
                                                                                 ${estimate.explanation}
                                                                             </p>
                                                                         </div>
-                                                                    </div>
                                                                     <sf:form method="DELETE" modelAttribute="planningPokerEstimate"
                                                                         action="/planningpoker/estimate" accept-charset="UTF-8">
                                                                         <sf:input path="userStory.id" type="hidden" value="${story.id}"></sf:input>

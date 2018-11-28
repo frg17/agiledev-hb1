@@ -3,7 +3,9 @@
 
 <header class="header" >
     <div class="header--container">
-        <h2 class="heading heading--header">Agile Developer</h2>
+        <a href="/">
+            <h2 class="heading heading--header">Agile Developer</h2>
+        </a>
         
         <c:if test="${loggedIn}">
         <button class="button button--settings" onclick="toggleSettingsTab()">
