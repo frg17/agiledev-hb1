@@ -1,13 +1,14 @@
 .settings--tab {
     display : none;
-    padding: 10px;
-
-    flex-direction: column;
-    position: absolute;
-    right: 0;
-    top: 40px;
-    z-index: 10;
-    border-style: outset;
-    background: #fff;
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 5px 20px;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
+
+.settings--tab .button {
+    margin-left: 10px;
+}

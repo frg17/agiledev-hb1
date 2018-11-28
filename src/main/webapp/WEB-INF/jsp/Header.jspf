@@ -1,8 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
-<header>
-        <h2>Agile Developer</h2>
+<header class="header" >
+    <div class="header--container">
+        <h2 class="heading heading--header">Agile Developer</h2>
+        
+        <c:if test="${loggedIn}">
         <button class="button button--settings" onclick="toggleSettingsTab()">
             <img src="<c:url value="/img/settings.png"/>" alt="Settings"></img>
             </button>
+        </c:if>
+    </div>
+    <%@ include file="./SettingsTab.jspf" %>
 </header>

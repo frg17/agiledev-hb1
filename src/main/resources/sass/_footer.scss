@@ -1,0 +1,16 @@
+.footer {
+    max-width: 100%;
+    width: 100%;
+}
+
+.footer--container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    border-top: 1px solid #333;
+    margin: auto;
+}
+

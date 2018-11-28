@@ -1,7 +1,11 @@
 .create {
-    border: 1px solid #000;
+    border: 1px solid #555;
+    border-radius: 5px;
+    max-width: 30%;
     width: 35vw;
-    height: 35vh;
+    height: 45vh;
+    margin: auto;
+    padding: 10px;
     min-width: 250px;
     min-height: 250px;
     display: flex;
@@ -38,4 +42,12 @@
         }
     }
 
+    &__heading {
+        margin: auto;
+    }
+
+}
+
+.create input {
+    text-align: center;
 }

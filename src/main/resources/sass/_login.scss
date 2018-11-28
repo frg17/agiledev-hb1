@@ -1,7 +1,10 @@
 .login {
-    border: 1px solid #000;
+    border: 1px solid #555;
+    border-radius: 5px;
+    max-width: 30%;
     width: 35vw;
     height: 35vh;
+    margin: auto;
     min-width: 250px;
     min-height: 250px;
     display: flex;
@@ -38,4 +41,8 @@
         }
     }
 
+}
+
+.login input {
+    text-align: center;
 }
