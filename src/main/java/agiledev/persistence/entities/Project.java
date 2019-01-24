@@ -24,6 +24,8 @@ public class Project {
     private Date created;   //Timestamp
 
     private String name;    //Name of project
+    
+    @Column(unique=true)
     private String token;   //Token for project
     private Integer projectPhase = Project.PROJECT_PHASE_DEFAULT;
 
