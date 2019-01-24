@@ -15,3 +15,13 @@ In the root directory write in the console:
 ```
 mvn spring-boot:run
 ```
+
+## Postgres breytingar
+Til að keyra verkefnið núna locally þarf eftirfarandi:
+
+* Postgres
+* Environment variables:
+* * SPRING_DATASOURCE_URL
+* * SPRING_DATASOURCE_USERNAME
+* * SPRING_DATASOURCE_PASSWORD
+
