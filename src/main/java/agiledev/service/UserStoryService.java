@@ -40,4 +40,5 @@ public class UserStoryService {
     public void update(String textContent, String author, Long id, Long projectId) {
         this.repository.update(textContent, author, id, projectId);
     }
+    
 }

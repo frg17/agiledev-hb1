@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "userstories")
 public class UserStory {
@@ -24,6 +26,7 @@ public class UserStory {
     private Integer priority;
     private Double planningPokerPriority;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
 
