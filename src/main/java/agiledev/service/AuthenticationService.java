@@ -34,4 +34,15 @@ public class AuthenticationService {
         model.addAttribute("loggedIn", false);
         return false;
     }
+
+    /**
+     * Overload af isAuthenticated án model
+     * @param res
+     * @return
+     */
+    public boolean isAuthenticated(HttpServletResponse res) {
+        String token = res.getHeader("authenticated");
+        if (token != null) return true;
+        return false;
+    }
 }
