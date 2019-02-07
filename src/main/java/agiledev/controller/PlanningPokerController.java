@@ -78,8 +78,6 @@ public class PlanningPokerController {
 
         if(!this.auth.isAuthenticated(res, model)) return "redirect:/";
 
-        System.out.println("!I!I!I!I!I!I" + estimate.getEstimate());
-
         UserStory us = userStoryService.findOneByIdAndProjectId(            //Validate-a að userstory id
             estimate.getUserStory().getId(), getProjectId(projectToken));   //tilheyri þessu verkefni
 
@@ -123,6 +121,7 @@ public class PlanningPokerController {
         return "redirect:/";
     }
 
+    
 
     /**
      * Finds project id from a project token.
