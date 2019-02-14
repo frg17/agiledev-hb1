@@ -3,6 +3,8 @@ package agiledev.persistence.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 /**
@@ -20,6 +22,7 @@ public class PriorityEstimate {
     private int estimate;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private UserStory userStory;
 
     private String explanation;
