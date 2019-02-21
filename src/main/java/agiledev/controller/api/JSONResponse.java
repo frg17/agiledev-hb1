@@ -1,5 +1,6 @@
 package agiledev.controller.api;
 
+
 public class JSONResponse {
     private boolean success;
     private String message;
@@ -10,5 +11,26 @@ public class JSONResponse {
         this.success = success;
         this.message = message;
         this.content = object;
+    }
+
+    /**
+     * @return the content
+     */
+    public Object getContent() {
+        return content;
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @return the success
+     */
+    public boolean isSuccess() {
+        return success;
     }
 }

@@ -2,8 +2,6 @@ package agiledev.controller.api;
 
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,28 +30,28 @@ public class RestfulPlanningPokerController {
     ) {
         if (!this.auth.isAuthenticated(res)) {
             res.setStatus(401); // NotAuthorized status
-            return null; // Skila engu
+            return new JSONResponse(false, "Unauthorized", null); // Skila engu
         }
-        PlanningPokerEstimate created = null;
 
         String projectToken = res.getHeader("authenticated");
         UserStory us = userStoryService.findOneByIdAndProjectId(estimate.getUserStory().getId(),
                 getProjectId(projectToken));
         if (us != null) {
-            this.planningPokerService.save(estimate);
+            PlanningPokerEstimate e = this.planningPokerService.save(estimate);
+            return new JSONResponse(true, "Estimation Created", e);
         }
-        return "estimación creada";
+        return new JSONResponse(false, "User story ID not found", null);
     }
 
     @DeleteMapping(value = "api/planningpoker/delete", produces = "application/json")
-    public String deleteEstimate(
+    public Object deleteEstimate(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         HttpServletResponse res,
         @RequestBody PlanningPokerEstimate estimate) {
 
         if(!this.auth.isAuthenticated(res)) {
             res.setStatus(401); //NotAuthorized status
-            return null; //Skila engu.
+            return new JSONResponse(false, "Unauthorized", null); //Skila engu.
         }
 
         UserStory us = userStoryService.findOneByIdAndProjectId( // Validate-a að userstory id
@@ -61,28 +59,24 @@ public class RestfulPlanningPokerController {
 
         if (us != null) {
             this.planningPokerService.delete(estimate);
-            return "estimate deleted";
+            return new JSONResponse(true, "Estimate deleted", null);
         }
 
-        return "unsuccessful";
+        return new JSONResponse(false, "User story ID not found", null);
     }
 
     @PatchMapping("api/planningpoker/finalizeEstimates")
-    public String finalizeEstimates(
+    public Object finalizeEstimates(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         HttpServletResponse res
         ) {
             
         if(!this.auth.isAuthenticated(res)) {
             res.setStatus(401); //NotAuthorized status
-            return null; //Skila engu.
+            return new JSONResponse(false, "Unauthorized", null); //Skila engu.
         }  
 
         Project project = this.projectService.findByToken(projectToken);
-
-        // skiptum yfir í phase 0 við að finalize-a
-        project.setProjectPhase(Project.PROJECT_PHASE_DEFAULT);
-
 
         List<UserStory> userStories =  project.getUserStories(); //Lazy fetch
 
@@ -96,7 +90,7 @@ public class RestfulPlanningPokerController {
         }
 
         
-        return "Estimates have been finalized";
+        return new JSONResponse(true, "Estimates finalized", null);
     }
 
     public Long getProjectId(String token) {
