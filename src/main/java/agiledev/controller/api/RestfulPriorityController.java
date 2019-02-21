@@ -63,7 +63,7 @@ public class RestfulPriorityController {
      * deletes an estimate if the client is authenticated
      */
     @DeleteMapping("api/priority/delete")
-    public String deleteEstimate(
+    public Object deleteEstimate(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         HttpServletResponse res,
         @RequestBody PriorityEstimate estimate) {
@@ -91,7 +91,7 @@ public class RestfulPriorityController {
      * Calculates the average and patches the corresponding user story
      */
     @PatchMapping("api/priority/finalizeEstimates")
-    public String finalizeEstimates(
+    public Object finalizeEstimates(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         HttpServletResponse res) {
             
