@@ -34,7 +34,7 @@ public class RestfulPriorityController {
      * saves an estimate if the client is authenticated
      */
     @PostMapping("api/priority/estimate")
-    public String saveEstimates(
+    public Object saveEstimates(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken,
         HttpServletResponse res,
         @RequestBody PriorityEstimate estimate //Segir spring að parse-a JSON sem að client sendir beint í UserStory hlut.
@@ -42,19 +42,21 @@ public class RestfulPriorityController {
 
         if(!this.auth.isAuthenticated(res)) {
             res.setStatus(401); //NotAuthorized status
-            return null; //Skila engu.
+            return new JSONResponse(false, "Unauthorized", null);
         }
     
         UserStory us = userStoryService.findOneByIdAndProjectId(             
             estimate.getUserStory().getId(), projectService.findOneByToken(projectToken).getId());
         
         if(us != null) {
-            this.priorityService.save(estimate);
-            return "estimate saved";
+            PriorityEstimate es = this.priorityService.save(estimate);
+            res.setStatus(201);
+
+            return new JSONResponse(true, "estimate saved", es);
         }
 
         res.setStatus(400);
-        return "unsuccessful saving the estimate";
+        return new JSONResponse(false, "ID not valid", null);
     }
 
      /**
@@ -68,7 +70,7 @@ public class RestfulPriorityController {
 
         if(!this.auth.isAuthenticated(res)) {
             res.setStatus(401); //NotAuthorized status
-            return null; //Skila engu.
+            return new JSONResponse(false, "Unauthorized", null);
         }
 
         UserStory us = userStoryService.findOneByIdAndProjectId(            //Validate-a að userstory id
@@ -76,10 +78,12 @@ public class RestfulPriorityController {
 
         if(us != null) {
             this.priorityService.delete(estimate);
-            return "estimate deleted";
+            res.setStatus(202); // successful deletion
+            return new JSONResponse(true, "Estimate Deleted", null);
         }
 
-        return "unsuccessful";
+        res.setStatus(400);
+        return new JSONResponse(false, "ID not valid", null);
     }
 
     /**
@@ -93,7 +97,7 @@ public class RestfulPriorityController {
             
         if(!this.auth.isAuthenticated(res)) {
             res.setStatus(401); //NotAuthorized status
-            return null; //Skila engu.
+            return new JSONResponse(false, "Unauthorized", null); //Skila engu.
         }  
 
         Project project = this.projectService.findByToken(projectToken);
@@ -113,8 +117,8 @@ public class RestfulPriorityController {
             this.userStoryService.save(us);  //Uppfæri
         }
 
-        
-        return "Estimates have been finalized";
+        res.setStatus(201);
+        return new JSONResponse(true, "Estimates have been finalized", null);
     }
     
 }
