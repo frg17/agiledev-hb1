@@ -23,13 +23,13 @@ public class RestfulProjectController {
      *  returns a boolean if you're 
      */
     @GetMapping("api/projects/")
-    public boolean index(
+    public Object index(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken)
     {
         if(projectService.findByToken(projectToken) == null) {
-            return false;
+            return new JSONResponse(false, "Token invalid.", null);
         } else {
-            return true;
+            return new JSONResponse(true, "Token valid", null);
         }   
     }
 

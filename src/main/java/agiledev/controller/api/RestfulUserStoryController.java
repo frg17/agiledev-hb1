@@ -47,21 +47,21 @@ public class RestfulUserStoryController {
 
         story.setProject(this.getProject(res)); //Þarf að nota setja project sem eiganda fyrir user story.
         UserStory created = this.userStoryService.save(story);
-
-        JSONResponse response = new JSONResponse(true, null, null);
-        return this.userStoryService.save(story); //Save-a user story í gagnagrunn. Return object (Verður automatically að JSON)
+        JSONResponse response = new JSONResponse(true, "Story created", created);
+        return response; //Save-a user story í gagnagrunn. Return object (Verður automatically að JSON)
     }
 
     @RequestMapping(value = "/api/userstories", method = RequestMethod.GET, produces = "application/json")
     public Object getAllUserStories(HttpServletResponse res) {
         if(!this.auth.isAuthenticated(res)) {
             res.setStatus(401);
-            return null;
+            return new JSONResponse(false, "Unauthorized", null);
         }
         
         //Authenticated header geymir token.
         Project project = this.getProject(res);
         List<UserStory> stories = project.getUserStories();
+        new JSONResponse(true, "Userstories fetched", stories.toArray());
         return stories.toArray();
     }
 
@@ -69,18 +69,17 @@ public class RestfulUserStoryController {
     public Object editUserStory(HttpServletResponse res, @RequestBody UserStory story) {
         if (!this.auth.isAuthenticated(res)) {
             res.setStatus(401);
-            return null;
+            return new JSONResponse(false, "Unauthorized", null);
         }
 
         if(story.getId() == null) {
             res.setStatus(400);
-            return "Need ID of user story";
+            return new JSONResponse(false, "ID of user story needs to be included.", null);
         }
 
         story.setProject(this.getProject(res));
-
-        UserStory created = this.userStoryService.save(story);
-        JSONResponse response = new JSONResponse(true, "Success", created);
+        UserStory updated = this.userStoryService.save(story);
+        JSONResponse response = new JSONResponse(true, "Success", updated);
         return response;
     }
 
@@ -88,18 +87,18 @@ public class RestfulUserStoryController {
     public Object deleteUserStory(HttpServletResponse res, @RequestBody UserStory story) {
         if(!this.auth.isAuthenticated(res)) {
             res.setStatus(401);
-            return null;
+            return new JSONResponse(false, "Unauthorized", null);
         }
 
         if(story.getId() == null) {
             res.setStatus(400);
-            return "Need ID of user story";
+            return new JSONResponse(false, "Need ID of user story", null);
         }
 
         story.setProject(this.getProject(res));
 
         this.userStoryService.delete(story);
-        return "Sucess";
+        return new JSONResponse(true, "Userstory Deleted", null);
     }
 
 
