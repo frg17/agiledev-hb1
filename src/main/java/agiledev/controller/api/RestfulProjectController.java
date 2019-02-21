@@ -37,20 +37,21 @@ public class RestfulProjectController {
         Handles user login to project.
     */
     @PostMapping("api/projects/login")
-    public String projectLogin(@RequestBody Project token, HttpServletResponse res)
+    public Object projectLogin(@RequestBody Project token, HttpServletResponse res)
     {
         
         if(token.getToken() != null) {
-            if(this.projectService.findByToken(token.getToken()) != null) {
+            Project project = this.projectService.findByToken(token.getToken());
+            if(project != null) {
                 Cookie cookie = new Cookie("projectToken", token.getToken());
                 cookie.setPath("/");
                 res.addCookie(cookie);
 
-                return "Success";
+                return new JSONResponse(true, "Log in success.", project);
             }
         }
 
-        return "Failure";
+        return new JSONResponse(false, "Request body must include token.", null);
     }
 
 
@@ -58,7 +59,7 @@ public class RestfulProjectController {
         Logs user out
     */
     @PostMapping("api/projects/logout")
-    public String projectLogout(
+    public Object projectLogout(
         HttpServletRequest req,
         HttpServletResponse res)
     {
@@ -66,7 +67,7 @@ public class RestfulProjectController {
         cookie.setPath("/");
         res.addCookie(cookie);
 
-        return "Logged out";
+        return new JSONResponse(true, "Logout success", null);
     }
 
 
@@ -75,18 +76,18 @@ public class RestfulProjectController {
         Creates a new project on the server
     */
     @PostMapping("api/projects/create")
-    public String createProjectPOST(@RequestBody Project project) 
+    public Object createProjectPOST(@RequestBody Project project) 
     {
 
         if(this.projectService.findByToken(project.getToken()) != null) {
-            return "Project already exists";
+            return new JSONResponse(false, "Project token already exists", null);
         }
 
         if (project.getToken() != null || !project.getToken().equals("")) {
-                this.projectService.save(project);
-                return "Project created";            
+                Project created =this.projectService.save(project);
+                return new JSONResponse(true, "Project Created", created);            
         }
     
-        return "Input not valid";
+        return new JSONResponse(false, "Request body must include 'name' and 'token'.", null);
     }
 }
