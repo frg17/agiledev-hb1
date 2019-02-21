@@ -42,10 +42,13 @@ public class RestfulUserStoryController {
     ) {
         if(!this.auth.isAuthenticated(res)) { //Authentication
             res.setStatus(401); //NotAuthorized status
-            return null; //Skila engu.
+            return new JSONResponse(false, "Unauthorized", null); //Skila engu.
         }
 
         story.setProject(this.getProject(res)); //Þarf að nota setja project sem eiganda fyrir user story.
+        UserStory created = this.userStoryService.save(story);
+
+        JSONResponse response = new JSONResponse(true, null, null);
         return this.userStoryService.save(story); //Save-a user story í gagnagrunn. Return object (Verður automatically að JSON)
     }
 
