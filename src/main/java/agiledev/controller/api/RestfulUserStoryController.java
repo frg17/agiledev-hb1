@@ -75,7 +75,10 @@ public class RestfulUserStoryController {
         }
 
         story.setProject(this.getProject(res));
-        return this.userStoryService.save(story);
+
+        UserStory created = this.userStoryService.save(story);
+        JSONResponse response = new JSONResponse(true, "Success", created);
+        return response;
     }
 
     @RequestMapping(value = "api/userstory/delete", method = RequestMethod.DELETE)
