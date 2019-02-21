@@ -6,6 +6,9 @@
 package agiledev.persistence.entities;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class Project {
     private String token;   //Token for project
     private Integer projectPhase = Project.PROJECT_PHASE_DEFAULT;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     @OrderBy("created ASC")
     private List<UserStory> userStories;
