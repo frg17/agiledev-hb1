@@ -1,5 +1,7 @@
 package agiledev.controller.api;
 
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +45,7 @@ public class RestfulProjectController {
         if(token.getToken() != null) {
             Project project = this.projectService.findByToken(token.getToken());
             if(project != null) {
-                Cookie cookie = new Cookie("projectToken", token.getToken());
+                Cookie cookie = new Cookie("projectToken", token.getToken() + "; expires=" + (new Date(2030, 1, 1)).toString());
                 cookie.setPath("/");
                 res.addCookie(cookie);
 
