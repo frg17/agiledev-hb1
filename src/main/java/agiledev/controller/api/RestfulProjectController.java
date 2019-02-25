@@ -47,13 +47,13 @@ public class RestfulProjectController {
             Project project = this.projectService.findByToken(token.getToken());
             if(project != null) {
                 try {
-                    Cookie cookie = new Cookie("projectToken", URLEncoder.encode( token.getToken() + ";expires=" + ((int) (Date.UTC(2030, 1, 1, 1, 1, 1))), "UTF-8"));
+                    Cookie cookie = new Cookie("projectToken", token.getToken());
                     cookie.setPath("/");
+                    cookie.setMaxAge(3600 * 24 * 365);
                     res.addCookie(cookie);
                 } catch (Exception e) {
-                    
+
                 }
-                
 
                 return new JSONResponse(true, "Log in success.", project);
             }
