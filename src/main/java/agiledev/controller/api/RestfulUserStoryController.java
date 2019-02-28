@@ -60,8 +60,8 @@ public class RestfulUserStoryController {
         //Authenticated header geymir token.
         Project project = this.getProject(res);
         List<UserStory> stories = project.getUserStories();
-        new JSONResponse(true, "Userstories fetched", stories.toArray());
-        return stories.toArray();
+        
+        return new JSONResponse(true, "Userstories fetched", stories.toArray());
     }
 
     @RequestMapping(value = "/api/userstory/edit", method = RequestMethod.PATCH, produces = "application/json")
