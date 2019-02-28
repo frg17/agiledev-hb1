@@ -1,5 +1,8 @@
 package agiledev.controller.api;
 
+import java.net.URLEncoder;
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,9 +46,14 @@ public class RestfulProjectController {
         if(token.getToken() != null) {
             Project project = this.projectService.findByToken(token.getToken());
             if(project != null) {
-                Cookie cookie = new Cookie("projectToken", token.getToken());
-                cookie.setPath("/");
-                res.addCookie(cookie);
+                try {
+                    Cookie cookie = new Cookie("projectToken", token.getToken());
+                    cookie.setPath("/");
+                    cookie.setMaxAge(3600 * 24 * 365);
+                    res.addCookie(cookie);
+                } catch (Exception e) {
+
+                }
 
                 return new JSONResponse(true, "Log in success.", project);
             }
