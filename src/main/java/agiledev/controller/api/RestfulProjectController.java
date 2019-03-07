@@ -1,8 +1,5 @@
 package agiledev.controller.api;
 
-import java.net.URLEncoder;
-import java.util.Date;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

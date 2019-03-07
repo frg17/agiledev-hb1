@@ -3,7 +3,7 @@ package agiledev.persistence.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
@@ -22,7 +22,7 @@ public class PriorityEstimate {
     private int estimate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private UserStory userStory;
 
     private String explanation;

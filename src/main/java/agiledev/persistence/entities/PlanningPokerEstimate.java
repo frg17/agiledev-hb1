@@ -9,6 +9,7 @@ package agiledev.persistence.entities;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "planningpokerestimates")
@@ -22,7 +23,7 @@ public class PlanningPokerEstimate {
     private Float estimate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private UserStory userStory;
 
     private String explanation;

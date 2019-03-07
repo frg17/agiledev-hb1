@@ -180,13 +180,4 @@ public class UserStory {
         this.priorityEstimates = priorityEstimates;
     }
 
-    @Override
-    public String toString() {
-        return "Project Id: " + this.project.getId() +
-            "\nId: " + this.id +
-            "\nAuthor: " + this.author + 
-            "\nContent: " + this.textContent;
-    }
-
-
 }
