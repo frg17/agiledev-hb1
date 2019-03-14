@@ -26,10 +26,11 @@ public class RestfulProjectController {
     public Object index(
         @CookieValue(value = "projectToken", defaultValue = "") String projectToken)
     {
-        if(projectService.findByToken(projectToken) == null) {
+        Project proj = projectService.findByToken(projectToken);
+        if(proj == null) {
             return new JSONResponse(false, "Token invalid.", null);
         } else {
-            return new JSONResponse(true, "Token valid", null);
+            return new JSONResponse(true, "Token valid", proj);
         }   
     }
 
